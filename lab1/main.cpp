@@ -62,7 +62,7 @@ void form_new_arr(int m, const int n, int* z)
 
     std::cout << "P = {" << *p;
 
-    for (int i = 1; i < m; i++)
+    for (int i = 1; i < m; ++i)
         std::cout << "; " << *(p + i);
 
     std::cout << "}\n";
@@ -95,11 +95,11 @@ int main() {
     int m = 0;
     int z[n]{};
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         std::cout << "Введите " << i + 1 << "-й элемент массива: ";
         std::cin >> z[i];
         if ((z[i] >= -8) && (z[i] <= 3))
-            m++;
+            ++m;
     }
 
     form_new_arr(m, n, z);
