@@ -1,34 +1,53 @@
 #include <iostream>
 #include <vector>
-#include "bigint.h"
 
-/**
- * @brief
- * Вычисление последовательности Фибоначчи
- * 
- * @param number
- * номер элемента в последовательности
- * 
- * @return
- * Элемент последовательности под номером number
-*/
-bigint fibonacci_sequence(const unsigned int number) {
-    std::vector<bigint> fibonacci_sequence_elements(number + 1);
-    fibonacci_sequence_elements[1] = 0, fibonacci_sequence_elements[2] = 1;
+void sum(std::vector<unsigned int> &res, std::vector<unsigned int> &nums1, std::vector<unsigned int> &nums2)
+{
+    size_t size = nums2.size();
 
-    for (unsigned int i = 3; i <= number; ++i)
-        fibonacci_sequence_elements[i] = fibonacci_sequence_elements[i - 2] + fibonacci_sequence_elements[i - 1];
+    if ((nums1.back() + nums2.back()) >> 31)
+    {
+        res.resize(size + 1);
+    }
+    else
+    {
+        res.resize(size);
+    }
 
-    return fibonacci_sequence_elements[number];
+    for (size_t i = 0; i < size; ++i)
+    {
+        if ((nums1[i] + nums2[i]) >> 31)
+        {
+            res[i] += (nums1[i] + nums2[i]) & ~(1 << 31);
+            ++res[i + 1];
+        }
+        else
+        {
+            res[i] += nums1[i] + nums2[i];
+        }
+    }
+
+    return;
 }
 
-int main(int, char**) {
+int main(int, char**)
+{
     unsigned int input_1;
+    std::vector<unsigned int> nums1{ 1073741827, 52, 8831 };
+    std::vector<unsigned int> nums2{ 1073741824, 4342, 111 };
+    std::vector<unsigned int> res;
 
     std::cout << "Input Fibonacci sequence element number: ";
     std::cin >> input_1;
 
-    std::cout << fibonacci_sequence(input_1) << std::endl;
+    sum(res, nums1, nums2);
+
+    for (size_t i = 0; i < 3; ++i)
+    {
+        std::cout << res[i] << " ";
+    }
+
+    std::cout << "\n";
 
     return 0;
 }
