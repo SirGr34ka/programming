@@ -1,33 +1,30 @@
 #include <iostream>
 #include <vector>
-// 49
 
 void sum(std::vector<unsigned int> &res, std::vector<unsigned int> &nums1, std::vector<unsigned int> &nums2)
 {
     size_t size = nums2.size();
-    unsigned long long temp = nums1.back() + nums2.back();
-    unsigned int a = temp >> 31;
+    unsigned int temp = nums1[size - 2] + nums2[size - 2];
 
     res.clear();
 
-    if (temp >> 31)
+    if ((temp / 1'000'000'000) > 0)
     {
         res.resize(size + 1);
-        res.push_back(0);
     }
     else
     {
         res.resize(size);
     }
 
-    for (size_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < size - 1; ++i)
     {
         temp = nums1[i] + nums2[i];
-        res[i] += temp & ~(1 << 32);
+        res[i] += temp % 1'000'000'000;
 
-        if (temp >> 32)
+        if ((temp / 1'000'000'000) > 0)
         {
-            res[i + 1] = 1;
+            res[i + 1] = temp / 1'000'000'000;
         }
     }
 
@@ -36,7 +33,7 @@ void sum(std::vector<unsigned int> &res, std::vector<unsigned int> &nums1, std::
 
 void fibonacci_sequence(size_t num, std::vector<std::vector<unsigned int>> &elements)
 {
-    std::vector<unsigned int> res(1);
+    std::vector<unsigned int> res(2);
 
     elements[0] = res;
     elements[1] = res;
@@ -64,6 +61,15 @@ int main(int, char**)
     std::vector<std::vector<unsigned int>> fibonacci_sequence_elements(input_1 + 1, res);
 
     fibonacci_sequence(input_1, fibonacci_sequence_elements);
+
+    std::vector<unsigned int> element = fibonacci_sequence_elements[input_1];
+
+    for (size_t i = element.size() - 1; i > 0; --i)
+    {
+        std::cout << element[i - 1];
+    }
+
+    std::cout << std::endl;
 
     return 0;
 }
