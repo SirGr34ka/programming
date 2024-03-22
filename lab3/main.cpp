@@ -1,36 +1,69 @@
 #include <iostream>
+#include <vector>
 #include <string>
 
 /**
  * @brief
- * Функция форматирует IPv4 адрес, заменяя "." на "[.]"
+ * Функция считает минимальное время, за которое будут доставлены все грузы
  * 
- * @param adress
- * адрес, который нужно отформатировать
+ * @param orders
+ * заказы
+ * 
+ * @param time
+ * время
+ * 
+ * @param transport
+ * выбранный транспорт для доставки заказов (не выбран по умолчанию)
+ * 
+ * @return Возвращает минимальное время
 */
-void formatting_adress(std::string &adress)
+unsigned int min_time(const std::vector<std::string> &orders, const std::vector<unsigned int> &time, const std::string &transport = "")
 {
-    size_t index = 0; // Индекс точки в адресе
-    std::string replacement = "[.]"; // Замена "."
+    unsigned int res = 0;
 
-    for (size_t i = 0; i < 3; ++i, index += 2)
+    // Вычисление суммарного времени для трех грузовиков
+    if (transport == "")
     {
-        index = adress.find('.', index); // Находит индекс следующей точки
-        adress.replace(index, 1, replacement); // Заменяет точку на замену
+        res = min_time(orders, time, "Е") + min_time(orders, time, "Э") + min_time(orders, time, "К");
+    }
+    else
+    {
+        std::vector<size_t> the_num_of_orders(orders.size());
+        size_t cnt = 0, index = 0;
+
+        for (size_t i = 0; i < orders.size(); ++i)
+        {
+            for (size_t j = 0; j < orders[i].size(); ++j)
+            {
+                if (orders[i][j] == transport[0])
+                {
+                    ++cnt;
+                }
+            }
+
+            if (cnt > 0)
+            {
+                index = i;
+            }
+
+            the_num_of_orders[i] = cnt;
+        }
+
+        the_num_of_orders.resize(index + 1);
     }
 
-    return;
+    return res;
 }
 
-int main(int, char**){
-    std::string adress;
+int main(int, char**)
+{
+    /**Заказы в i-ых домах, где: Е - Еда, Э - Электроника, К - Книги*/
+    std::vector<std::string> orders{"Е", "Э", "ЕЭ", "ЕЕ"};
 
-    std::cout << "Enter IPv4 adress: ";
-    std::cin >> adress;
+    /**Время в минутах, обозначающее сколько ехать от i-го до i+1-го домов*/
+    std::vector<unsigned int> time{2, 3, 4};
 
-    formatting_adress(adress);
-
-    std::cout << "After formatting: " << adress << "\n";
+    unsigned int res = min_time(orders, time);
 
     return 0;
 }
