@@ -4,106 +4,110 @@
 
 /**
  * @brief
- * Считает время, за которое один транспорт доставляет грузы по домам
+ * Находит максимальное среди двух чисел
  * 
- * @param orders
- * заказы
+ * @param num1
+ * первое число
  * 
- * @param time
- * время между домами
- * 
- * @param transport
- * выбранный транспорт для доставки заказов (не выбран по умолчанию)
- * 
- * @param res
- * полученное время
- * 
- * @return Время одного транспорта
+ * @param num2
+ * второе число
 */
-unsigned int time_costs(const std::vector<std::string> &orders, const std::vector<unsigned int> &time, const char &transport, unsigned int& res)
+void max_num(unsigned int& num1, unsigned int& num2)
 {
-    std::vector<size_t> the_num_of_orders(orders.size());
-    size_t cnt = 0, index = 0;
-
-    // Вычисление кол-ва заказов по домам
-    for (size_t i = 0; i < orders.size(); ++i)
+    if (num2 > num1)
     {
-        for (size_t j = 0; j < orders[i].size(); ++j)
-        {
-            if (orders[i][j] == transport)
-            {
-                ++cnt;
-            }
-        }
-
-        if (cnt > 0)
-        {
-            index = i + 1;
-        }
-
-        the_num_of_orders[i] = cnt;
-
-        cnt = 0;
+        num1 = num2;
     }
 
-    // Если дальше заказов нет, то уменьшаем кол-во домов
-    the_num_of_orders.erase(the_num_of_orders.begin() + index, the_num_of_orders.end());
-
-    // Разгрузка в первом доме
-    res += the_num_of_orders[0];
-
-    // Разгрузка + время до этого дома
-    for (size_t i = 1; i < the_num_of_orders.size(); ++i)
-    {
-        res += time[i - 1] + the_num_of_orders[i];
-    }
-
-    return res;
+    return;
 }
 
 /**
  * @brief
- * Считает минимальное время, за которое будут доставлены все грузы
+ * Находит букву в векторе
  * 
- * @param orders
- * заказы
+ * @param letter
+ * буква
  * 
- * @param time
- * время между домами
+ * @param letters
+ * вектор букв
  * 
- * @param transport
- * выбранный транспорт для доставки заказов (не выбран по умолчанию)
- * 
- * @return Минимальное время на доставку грузов
+ * @return
+ * Индекс буквы в векторе
 */
-unsigned int min_time(const std::vector<std::string> &orders, const std::vector<unsigned int> &time, const char &transport = ' ')
+long long find_in_vector(const char& letter, const std::vector<char>& letters)
 {
-    unsigned int res = 0;
+    long long index = -1;
 
-    if (!(orders.empty()) && !(time.empty()) && (orders.size() - 1 == time.size()))
+    for (size_t i = 0; i < letters.size(); ++i)
     {
-        if (transport == ' ')
+        if (letters[i] == letter)
         {
-            res = min_time(orders, time, 'F') + min_time(orders, time, 'E') + min_time(orders, time, 'B'); // Вычисление суммарного времени для трех грузовиков
-        }
-        else
-        {
-            res = time_costs(orders, time, transport, res);
+            index = i;
+            break;
         }
     }
-    
+
+    return index;
+}
+
+/**
+ * @brief
+ * Считает вес каждого слова и находит среди них маскимальный счёт
+ * 
+ * @param words
+ * слова
+ * 
+ * @param letters
+ * буквы
+ * 
+ * @param score
+ * вес буквы
+ * 
+ * @return
+ * Максимальный счёт среди слов
+*/
+unsigned int max_score(const std::vector<std::string>& words, std::vector<char>& letters, const std::vector<unsigned int>& score)
+{
+    unsigned int res = 0, cnt = 0;
+    size_t index;
+
+    if (!words.empty() && !letters.empty())
+    {
+        for (const std::string word: words)
+        {
+            for (const char letter: word)
+            {
+                index = find_in_vector(letter, letters);
+
+                if (index != -1)
+                {
+                    cnt += score[letter - 97];
+                    letters.erase(letters.begin() + index);
+                }
+            }
+
+            max_num(res, cnt);
+            cnt = 0;
+        }
+    }
+
     return res;
 }
 
 int main(int, char**)
 {
-    /** Заказы в i-ых домах, где: F - Food,  E - Electronics, B - Books */
-    const std::vector<std::string> orders{"F", "E", "FE", "FF"};
+    std::vector<std::string> words = { "apple", "bingo", "respect" };
+    std::vector<char> letters = { 'a', 'p', 'p', 'l', 'e', 'e', 'b', 'g', 'o', 'r', 'e', 's', 'p', 'c', 't' };
+    std::vector<unsigned int> score(26);
 
-    /**Время в минутах, которое показывает сколько ехать от i-го до i+1-го домов*/
-    const std::vector<unsigned int> time{2, 3, 4};
+    // Заполнение score рандомными значениями в диапазоне [0;10)
+    for (size_t i = 0; i < 26; ++i)
+    {
+        score[i] = rand() % 10;
+    }
 
-    unsigned int res = min_time(orders, time);
+    unsigned int max = max_score(words, letters, score);
 
     return 0;
 }
