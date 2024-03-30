@@ -67,8 +67,9 @@ long long find_in_vector(const char& letter, const std::vector<char>& letters)
  * @return
  * Максимальный счёт среди слов
 */
-unsigned int max_score(const std::vector<std::string>& words, std::vector<char>& letters, const std::vector<unsigned int>& score)
+unsigned int max_score(const std::vector<std::string>& words, const std::vector<char> &letters, const std::vector<unsigned int>& score)
 {
+    std::vector<char> letters_copy = letters;
     unsigned int res = 0, cnt = 0;
     size_t index;
 
@@ -78,17 +79,18 @@ unsigned int max_score(const std::vector<std::string>& words, std::vector<char>&
         {
             for (const char letter: word)
             {
-                index = find_in_vector(letter, letters);
+                index = find_in_vector(letter, letters_copy);
 
                 if (index != -1)
                 {
                     cnt += score[letter - 97];
-                    letters.erase(letters.begin() + index);
+                    letters_copy.erase(letters_copy.begin() + index);
                 }
             }
 
             max_num(res, cnt);
             cnt = 0;
+            letters_copy = letters; // Восстановление letters для следующего слова
         }
     }
 
