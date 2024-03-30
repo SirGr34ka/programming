@@ -1,115 +1,86 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 /**
  * @brief
- * Находит максимальное среди двух чисел
+ * Проверяет на валидность IP адрес
  * 
- * @param num1
- * первое число
+ * @param adress
+ * IP адрес
  * 
- * @param num2
- * второе число
+ * @return
+ * true, если адрес валиден, иначе - false
 */
-void max_num(unsigned int& num1, unsigned int& num2)
+bool check_ip(std::string& adress)
 {
-    if (num2 > num1)
+    size_t cnt = 0;
+    std::string num;
+    std::stringstream temp(adress.c_str());
+
+    for (char simbol: adress)
     {
-        num1 = num2;
+        if (simbol == '.')
+        {
+            ++cnt;
+        }
+    }
+
+    if (cnt != 3)
+    {
+        return false;
+    }
+    else
+    {
+        while (std::getline(temp, num, '.'))
+        {
+            if (stoi(num) > 255)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+/**
+ * @brief
+ * Функция форматирует IPv4 адрес, заменяя "." на "[.]"
+ * 
+ * @param adress
+ * адрес, который нужно отформатировать
+*/
+void formatting_adress(std::string &adress)
+{
+    size_t index = 0; // Индекс точки в адресе
+    std::string replacement = "[.]"; // Замена "."
+
+    for (size_t i = 0; i < 3; ++i, index += 2)
+    {
+        index = adress.find('.', index); // Находит индекс следующей точки
+        adress.replace(index, 1, replacement); // Заменяет точку на замену
     }
 
     return;
 }
 
-/**
- * @brief
- * Находит букву в векторе
- * 
- * @param letter
- * буква
- * 
- * @param letters
- * вектор букв
- * 
- * @return
- * Индекс буквы в векторе
-*/
-long long find_in_vector(const char& letter, const std::vector<char>& letters)
-{
-    long long index = -1;
+int main(int, char**){
+    std::string adress;
 
-    for (size_t i = 0; i < letters.size(); ++i)
+    std::cout << "Enter IPv4 adress: ";
+    std::cin >> adress;
+
+    if (check_ip(adress))
     {
-        if (letters[i] == letter)
-        {
-            index = i;
-            break;
-        }
+        formatting_adress(adress);
+        std::cout << "After formatting: " << adress << "\n";
     }
-
-    return index;
-}
-
-/**
- * @brief
- * Считает вес каждого слова и находит среди них маскимальный счёт
- * 
- * @param words
- * слова
- * 
- * @param letters
- * буквы
- * 
- * @param score
- * вес буквы
- * 
- * @return
- * Максимальный счёт среди слов
-*/
-unsigned int max_score(const std::vector<std::string>& words, const std::vector<char> &letters, const std::vector<unsigned int>& score)
-{
-    std::vector<char> letters_copy = letters;
-    unsigned int res = 0, cnt = 0;
-    size_t index;
-
-    if (!words.empty() && !letters.empty())
+    else
     {
-        for (const std::string word: words)
-        {
-            for (const char letter: word)
-            {
-                index = find_in_vector(letter, letters_copy);
-
-                if (index != -1)
-                {
-                    cnt += score[letter - 97];
-                    letters_copy.erase(letters_copy.begin() + index);
-                }
-            }
-
-            max_num(res, cnt);
-            cnt = 0;
-            letters_copy = letters; // Восстановление letters для следующего слова
-        }
+        std::cout << "Invalid adress\n";
     }
-
-    return res;
-}
-
-int main(int, char**)
-{
-    std::vector<std::string> words = { "apple", "bingo", "respect" };
-    std::vector<char> letters = { 'a', 'p', 'p', 'l', 'e', 'e', 'b', 'g', 'o', 'r', 'e', 's', 'p', 'c', 't' };
-    std::vector<unsigned int> score(26);
-
-    // Заполнение score рандомными значениями в диапазоне [0;10)
-    for (size_t i = 0; i < 26; ++i)
-    {
-        score[i] = rand() % 10;
-    }
-
-    unsigned int max = max_score(words, letters, score);
-
+    
     return 0;
 }
