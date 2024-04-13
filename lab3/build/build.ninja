@@ -246,7 +246,7 @@ build lab3.exe: CXX_EXECUTABLE_LINKER__lab3_Debug CMakeFiles/lab3.dir/main.cpp.o
 # Utility command for package
 
 build CMakeFiles/package.util: CUSTOM_COMMAND all
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cpack.exe --config ./CPackConfig.cmake"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cpack.exe --config ./CPackConfig.cmake"
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -258,7 +258,7 @@ build package: phony CMakeFiles/package.util
 # Utility command for package_source
 
 build CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cpack.exe --config ./CPackSourceConfig.cmake C:/programming/lab3/build/CPackSourceConfig.cmake"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cpack.exe --config ./CPackSourceConfig.cmake C:/programming/lab3/build/CPackSourceConfig.cmake"
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -270,7 +270,7 @@ build package_source: phony CMakeFiles/package_source.util
 # Utility command for test
 
 build CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe --force-new-ctest-process "
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -282,7 +282,7 @@ build test: phony CMakeFiles/test.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -293,7 +293,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -SC:\programming\lab3 -BC:\programming\lab3\build"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -SC:\programming\lab3 -BC:\programming\lab3\build"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -305,7 +305,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Custom command for CMakeFiles\Experimental
 
 build CMakeFiles/Experimental | ${cmake_ninja_workdir}CMakeFiles/Experimental: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Experimental"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Experimental"
   pool = console
 
 
@@ -313,7 +313,7 @@ build CMakeFiles/Experimental | ${cmake_ninja_workdir}CMakeFiles/Experimental: C
 # Custom command for CMakeFiles\Nightly
 
 build CMakeFiles/Nightly | ${cmake_ninja_workdir}CMakeFiles/Nightly: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Nightly"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Nightly"
   pool = console
 
 
@@ -321,7 +321,7 @@ build CMakeFiles/Nightly | ${cmake_ninja_workdir}CMakeFiles/Nightly: CUSTOM_COMM
 # Custom command for CMakeFiles\Continuous
 
 build CMakeFiles/Continuous | ${cmake_ninja_workdir}CMakeFiles/Continuous: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Continuous"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D Continuous"
   pool = console
 
 
@@ -329,7 +329,7 @@ build CMakeFiles/Continuous | ${cmake_ninja_workdir}CMakeFiles/Continuous: CUSTO
 # Custom command for CMakeFiles\NightlyMemoryCheck
 
 build CMakeFiles/NightlyMemoryCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemoryCheck: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyMemoryCheck"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyMemoryCheck"
   pool = console
 
 
@@ -337,7 +337,7 @@ build CMakeFiles/NightlyMemoryCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMe
 # Custom command for CMakeFiles\NightlyStart
 
 build CMakeFiles/NightlyStart | ${cmake_ninja_workdir}CMakeFiles/NightlyStart: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyStart"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyStart"
   pool = console
 
 
@@ -345,7 +345,7 @@ build CMakeFiles/NightlyStart | ${cmake_ninja_workdir}CMakeFiles/NightlyStart: C
 # Custom command for CMakeFiles\NightlyUpdate
 
 build CMakeFiles/NightlyUpdate | ${cmake_ninja_workdir}CMakeFiles/NightlyUpdate: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyUpdate"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyUpdate"
   pool = console
 
 
@@ -353,7 +353,7 @@ build CMakeFiles/NightlyUpdate | ${cmake_ninja_workdir}CMakeFiles/NightlyUpdate:
 # Custom command for CMakeFiles\NightlyConfigure
 
 build CMakeFiles/NightlyConfigure | ${cmake_ninja_workdir}CMakeFiles/NightlyConfigure: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyConfigure"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyConfigure"
   pool = console
 
 
@@ -361,7 +361,7 @@ build CMakeFiles/NightlyConfigure | ${cmake_ninja_workdir}CMakeFiles/NightlyConf
 # Custom command for CMakeFiles\NightlyBuild
 
 build CMakeFiles/NightlyBuild | ${cmake_ninja_workdir}CMakeFiles/NightlyBuild: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyBuild"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyBuild"
   pool = console
 
 
@@ -369,7 +369,7 @@ build CMakeFiles/NightlyBuild | ${cmake_ninja_workdir}CMakeFiles/NightlyBuild: C
 # Custom command for CMakeFiles\NightlyTest
 
 build CMakeFiles/NightlyTest | ${cmake_ninja_workdir}CMakeFiles/NightlyTest: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyTest"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyTest"
   pool = console
 
 
@@ -377,7 +377,7 @@ build CMakeFiles/NightlyTest | ${cmake_ninja_workdir}CMakeFiles/NightlyTest: CUS
 # Custom command for CMakeFiles\NightlyCoverage
 
 build CMakeFiles/NightlyCoverage | ${cmake_ninja_workdir}CMakeFiles/NightlyCoverage: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyCoverage"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyCoverage"
   pool = console
 
 
@@ -385,7 +385,7 @@ build CMakeFiles/NightlyCoverage | ${cmake_ninja_workdir}CMakeFiles/NightlyCover
 # Custom command for CMakeFiles\NightlyMemCheck
 
 build CMakeFiles/NightlyMemCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemCheck: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyMemCheck"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlyMemCheck"
   pool = console
 
 
@@ -393,7 +393,7 @@ build CMakeFiles/NightlyMemCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemCh
 # Custom command for CMakeFiles\NightlySubmit
 
 build CMakeFiles/NightlySubmit | ${cmake_ninja_workdir}CMakeFiles/NightlySubmit: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlySubmit"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D NightlySubmit"
   pool = console
 
 
@@ -401,7 +401,7 @@ build CMakeFiles/NightlySubmit | ${cmake_ninja_workdir}CMakeFiles/NightlySubmit:
 # Custom command for CMakeFiles\ExperimentalStart
 
 build CMakeFiles/ExperimentalStart | ${cmake_ninja_workdir}CMakeFiles/ExperimentalStart: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalStart"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalStart"
   pool = console
 
 
@@ -409,7 +409,7 @@ build CMakeFiles/ExperimentalStart | ${cmake_ninja_workdir}CMakeFiles/Experiment
 # Custom command for CMakeFiles\ExperimentalUpdate
 
 build CMakeFiles/ExperimentalUpdate | ${cmake_ninja_workdir}CMakeFiles/ExperimentalUpdate: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalUpdate"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalUpdate"
   pool = console
 
 
@@ -417,7 +417,7 @@ build CMakeFiles/ExperimentalUpdate | ${cmake_ninja_workdir}CMakeFiles/Experimen
 # Custom command for CMakeFiles\ExperimentalConfigure
 
 build CMakeFiles/ExperimentalConfigure | ${cmake_ninja_workdir}CMakeFiles/ExperimentalConfigure: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalConfigure"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalConfigure"
   pool = console
 
 
@@ -425,7 +425,7 @@ build CMakeFiles/ExperimentalConfigure | ${cmake_ninja_workdir}CMakeFiles/Experi
 # Custom command for CMakeFiles\ExperimentalBuild
 
 build CMakeFiles/ExperimentalBuild | ${cmake_ninja_workdir}CMakeFiles/ExperimentalBuild: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalBuild"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalBuild"
   pool = console
 
 
@@ -433,7 +433,7 @@ build CMakeFiles/ExperimentalBuild | ${cmake_ninja_workdir}CMakeFiles/Experiment
 # Custom command for CMakeFiles\ExperimentalTest
 
 build CMakeFiles/ExperimentalTest | ${cmake_ninja_workdir}CMakeFiles/ExperimentalTest: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalTest"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalTest"
   pool = console
 
 
@@ -441,7 +441,7 @@ build CMakeFiles/ExperimentalTest | ${cmake_ninja_workdir}CMakeFiles/Experimenta
 # Custom command for CMakeFiles\ExperimentalCoverage
 
 build CMakeFiles/ExperimentalCoverage | ${cmake_ninja_workdir}CMakeFiles/ExperimentalCoverage: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalCoverage"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalCoverage"
   pool = console
 
 
@@ -449,7 +449,7 @@ build CMakeFiles/ExperimentalCoverage | ${cmake_ninja_workdir}CMakeFiles/Experim
 # Custom command for CMakeFiles\ExperimentalMemCheck
 
 build CMakeFiles/ExperimentalMemCheck | ${cmake_ninja_workdir}CMakeFiles/ExperimentalMemCheck: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalMemCheck"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalMemCheck"
   pool = console
 
 
@@ -457,7 +457,7 @@ build CMakeFiles/ExperimentalMemCheck | ${cmake_ninja_workdir}CMakeFiles/Experim
 # Custom command for CMakeFiles\ExperimentalSubmit
 
 build CMakeFiles/ExperimentalSubmit | ${cmake_ninja_workdir}CMakeFiles/ExperimentalSubmit: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalSubmit"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ExperimentalSubmit"
   pool = console
 
 
@@ -465,7 +465,7 @@ build CMakeFiles/ExperimentalSubmit | ${cmake_ninja_workdir}CMakeFiles/Experimen
 # Custom command for CMakeFiles\ContinuousStart
 
 build CMakeFiles/ContinuousStart | ${cmake_ninja_workdir}CMakeFiles/ContinuousStart: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousStart"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousStart"
   pool = console
 
 
@@ -473,7 +473,7 @@ build CMakeFiles/ContinuousStart | ${cmake_ninja_workdir}CMakeFiles/ContinuousSt
 # Custom command for CMakeFiles\ContinuousUpdate
 
 build CMakeFiles/ContinuousUpdate | ${cmake_ninja_workdir}CMakeFiles/ContinuousUpdate: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousUpdate"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousUpdate"
   pool = console
 
 
@@ -481,7 +481,7 @@ build CMakeFiles/ContinuousUpdate | ${cmake_ninja_workdir}CMakeFiles/ContinuousU
 # Custom command for CMakeFiles\ContinuousConfigure
 
 build CMakeFiles/ContinuousConfigure | ${cmake_ninja_workdir}CMakeFiles/ContinuousConfigure: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousConfigure"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousConfigure"
   pool = console
 
 
@@ -489,7 +489,7 @@ build CMakeFiles/ContinuousConfigure | ${cmake_ninja_workdir}CMakeFiles/Continuo
 # Custom command for CMakeFiles\ContinuousBuild
 
 build CMakeFiles/ContinuousBuild | ${cmake_ninja_workdir}CMakeFiles/ContinuousBuild: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousBuild"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousBuild"
   pool = console
 
 
@@ -497,7 +497,7 @@ build CMakeFiles/ContinuousBuild | ${cmake_ninja_workdir}CMakeFiles/ContinuousBu
 # Custom command for CMakeFiles\ContinuousTest
 
 build CMakeFiles/ContinuousTest | ${cmake_ninja_workdir}CMakeFiles/ContinuousTest: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousTest"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousTest"
   pool = console
 
 
@@ -505,7 +505,7 @@ build CMakeFiles/ContinuousTest | ${cmake_ninja_workdir}CMakeFiles/ContinuousTes
 # Custom command for CMakeFiles\ContinuousCoverage
 
 build CMakeFiles/ContinuousCoverage | ${cmake_ninja_workdir}CMakeFiles/ContinuousCoverage: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousCoverage"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousCoverage"
   pool = console
 
 
@@ -513,7 +513,7 @@ build CMakeFiles/ContinuousCoverage | ${cmake_ninja_workdir}CMakeFiles/Continuou
 # Custom command for CMakeFiles\ContinuousMemCheck
 
 build CMakeFiles/ContinuousMemCheck | ${cmake_ninja_workdir}CMakeFiles/ContinuousMemCheck: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousMemCheck"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousMemCheck"
   pool = console
 
 
@@ -521,7 +521,7 @@ build CMakeFiles/ContinuousMemCheck | ${cmake_ninja_workdir}CMakeFiles/Continuou
 # Custom command for CMakeFiles\ContinuousSubmit
 
 build CMakeFiles/ContinuousSubmit | ${cmake_ninja_workdir}CMakeFiles/ContinuousSubmit: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousSubmit"
+  COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\programming\lab3\build && C:\msys64\mingw64\bin\ctest.exe -D ContinuousSubmit"
   pool = console
 
 # =============================================================================

@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/programming/lab4/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -isystem C:/msys64/mingw64/include/opencv4 -g -o CMakeFiles\\lab4.dir\\main.cpp.obj -c C:\\programming\\lab4\\main.cpp",
+  "file": "C:\\programming\\lab4\\main.cpp",
+  "output": "CMakeFiles\\lab4.dir\\main.cpp.obj"
+}
+]
