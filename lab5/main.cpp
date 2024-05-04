@@ -20,6 +20,7 @@ int main() {
     {
         std::cout << element[i - 1];
     }
+    
 
     std::cout << std::endl;
 
