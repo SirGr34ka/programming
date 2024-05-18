@@ -1,26 +1,25 @@
 #include <iostream>
-#include "division.h"
+#include "functions.h"
 
 int main(int, char**)
 {
-    int32_t first, second;
+    const int num = 3;
 
-    std::cout << "Input first number: ";
-    std::cin >> first;
-
-    std::cout << "Input second number: ";
-    std::cin >> second;
-
-    // Обработка исключения
     try
     {
-        int32_t res = division(first, second);
-        std::cout << "Division result: " << res;
+        std::cout << "Start" << std::endl;
+
+        function1(num);
+
+        std::cout << "End" << std::endl;
     }
-    catch(const char* err)
+    catch(int& num)
     {
-        std::cerr << err << std::endl;
-        return 1;
+        std::cout << "num square: " << num << std::endl;
+    }
+    catch(double& num)
+    {
+        std::cout << "Return double: " << num << std::endl;
     }
 
     return 0;
