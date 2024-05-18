@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/programming/lab5/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -g -o CMakeFiles\\lab5.dir\\main.cpp.obj -c C:\\programming\\lab5\\main.cpp",
+  "file": "C:\\programming\\lab5\\main.cpp",
+  "output": "CMakeFiles\\lab5.dir\\main.cpp.obj"
+},
+{
+  "directory": "C:/programming/lab5/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -g -o CMakeFiles\\lab5.dir\\fibonacciSequence.cpp.obj -c C:\\programming\\lab5\\fibonacciSequence.cpp",
+  "file": "C:\\programming\\lab5\\fibonacciSequence.cpp",
+  "output": "CMakeFiles\\lab5.dir\\fibonacciSequence.cpp.obj"
+}
+]
