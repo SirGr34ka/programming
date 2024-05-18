@@ -3,6 +3,12 @@
 
 int32_t division(int32_t num1, int32_t num2)
 {
+    // Если делитель равен нулю, то выкидываем ошибку
+    if (num2 == 0)
+    {
+        throw "Can't devide by zero!";
+    }
+
     bool sign = (num1 ^ num2) >> 31;
     int32_t quotient = 0;
     uint32_t abs_first = abs(num1), abs_second = abs(num2);

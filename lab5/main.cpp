@@ -11,22 +11,17 @@ int main(int, char**)
     std::cout << "Input second number: ";
     std::cin >> second;
 
-    // Обработка деления на ноль
+    // Обработка исключения
     try
     {
-        if (second == 0)
-        {
-            throw "Can't devide by zero!";
-        }
+        int32_t res = division(first, second);
+        std::cout << "Division result: " << res;
     }
     catch(const char* err)
     {
         std::cerr << err << std::endl;
         return 1;
     }
-
-    // Если все нормально, то делим и выводим частное
-    std::cout << "Quotient: " << division(first, second) << std::endl;
 
     return 0;
 }
