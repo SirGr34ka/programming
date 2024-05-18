@@ -1,28 +1,32 @@
 #include <iostream>
-#include "fibonacciSequence.h"
+#include "division.h"
 
-int main() {
-    size_t input_1;
+int main(int, char**)
+{
+    int32_t first, second;
 
-    std::cout << "Input Fibonacci sequence element number: ";
-    std::cin >> input_1;
+    std::cout << "Input first number: ";
+    std::cin >> first;
 
-    // Инициализация вектора, в котором будут храниться элементы последовательности
-    std::vector<std::vector<unsigned int>> fibonacci_sequence_elements(input_1 + 1);
+    std::cout << "Input second number: ";
+    std::cin >> second;
 
-    fibonacci_sequence(input_1, fibonacci_sequence_elements);
-
-    // input_1-й элемент последовательности
-    std::vector<unsigned int> element = fibonacci_sequence_elements[input_1];
-
-    // Вывод элемента
-    for (size_t i = element.size() - 1; i > 0; --i)
+    // Обработка деления на ноль
+    try
     {
-        std::cout << element[i - 1];
+        if (second == 0)
+        {
+            throw "Can't devide by zero!";
+        }
     }
-    
+    catch(const char* err)
+    {
+        std::cerr << err << std::endl;
+        return 1;
+    }
 
-    std::cout << std::endl;
+    // Если все нормально, то делим и выводим частное
+    std::cout << "Quotient: " << division(first, second) << std::endl;
 
     return 0;
 }
