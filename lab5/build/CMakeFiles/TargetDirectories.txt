@@ -1,3 +1,0 @@
-C:/programming/lab5/build/CMakeFiles/lab5.dir
-C:/programming/lab5/build/CMakeFiles/edit_cache.dir
-C:/programming/lab5/build/CMakeFiles/rebuild_cache.dir
