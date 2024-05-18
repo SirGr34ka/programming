@@ -1,14 +1,27 @@
 #include <iostream>
-#include "fibonacciSequence.h"
+#include "functions.h"
 
 int main(int, char**)
 {
-    size_t input_1;
-    
-    std::cout << "Input Fibonacci sequence element number: ";
-    std::cin >> input_1;
+    const int num = 3;
 
-    fibonacci_output(input_1);
+    // Обработка исключений
+    try
+    {
+        std::cout << "Start" << std::endl;
+
+        function1(num);
+
+        std::cout << "End" << std::endl;
+    }
+    catch(const int& num)
+    {
+        std::cout << "num square: " << num << std::endl;
+    }
+    catch(const double& num)
+    {
+        std::cout << "Return double: " << num << std::endl;
+    }
     
     return 0;
 }
