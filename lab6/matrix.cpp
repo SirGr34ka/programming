@@ -77,27 +77,84 @@ Matrix& Matrix::operator = (Matrix& right_matrix)
     return *this;
 }
 
-Matrix Matrix::operator + (Matrix& right_matrix)
+Matrix Matrix::operator + (Matrix right_matrix)
 {
     const int m = rows;
     const int n = columns;
     int** right_matrix_ptr = right_matrix.getMatrix();
 
-    Matrix result_matrix = *this;
-    int** result_matrix_ptr = result_matrix.getMatrix();
+    for (size_t i = 0; i < m; ++i)
+    {
+        int* right_row = right_matrix_ptr[i];
+        int* left_row = matrix[i];
+
+        for (size_t j = 0; j < n; ++j)
+        {
+            right_row[j] += left_row[j];
+        }
+    }
+
+    return right_matrix;
+}
+
+Matrix Matrix::operator - (Matrix right_matrix)
+{
+    const int m = rows;
+    const int n = columns;
+    int** right_matrix_ptr = right_matrix.getMatrix();
 
     for (size_t i = 0; i < m; ++i)
     {
         int* right_row = right_matrix_ptr[i];
-        int* result_row = result_matrix_ptr[i];
 
         for (size_t j = 0; j < n; ++j)
         {
-            result_row[j] += right_row[j];
+            right_row[j] = ~right_row[j] + 1;
         }
     }
 
-    return result_matrix;
+    return *this + right_matrix;
+}
+
+Matrix Matrix::operator * (const int& right_num)
+{
+    const int m = rows;
+    const int n = columns;
+
+    Matrix left_matrix = *this;
+    int** left_matrix_ptr = left_matrix.getMatrix();
+
+    for (size_t i = 0; i < m; ++i)
+    {
+        int* left_row = left_matrix_ptr[i];
+
+        for (size_t j = 0; j < n; ++j)
+        {
+            left_row[j] *= right_num;
+        }
+    }
+
+    return left_matrix;
+}
+
+Matrix Matrix::operator * (Matrix right_matrix)
+{
+    const int m = rows;
+    const int n = right_matrix.getColumns();
+    int** right_matrix_ptr = right_matrix.getMatrix();
+
+    Matrix result(m, n);
+    int** result_matrix_ptr = result.getMatrix();
+
+    for (size_t i = 0; i < m; ++i)
+    {
+        int* result_row = result_matrix_ptr[i];
+        
+        for (size_t j = 0; j < n; ++j)
+        {
+            result_row[i] += matrix[i][j] * right_matrix_ptr[j][i];
+        }
+    }
 }
 
 Matrix::~Matrix()

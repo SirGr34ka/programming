@@ -24,7 +24,10 @@ class Matrix
 
     // Перегрузка операторов
     Matrix& operator = (Matrix& right_matrix);
-    Matrix operator + (Matrix& right_matrix);
+    Matrix operator + (Matrix right_matrix);
+    Matrix operator - (Matrix right_matrix);
+    Matrix operator * (const int& right_num);
+    Matrix operator * (Matrix right_matrix);
 
     // Деструктор
     ~Matrix();
