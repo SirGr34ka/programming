@@ -22,12 +22,16 @@ class Matrix
     int getRows();
     int getColumns();
 
+    // Поиск максимального значения
+    int max();
+
     // Перегрузка операторов
-    Matrix& operator = (Matrix& right_matrix);
     Matrix operator + (Matrix right_matrix);
     Matrix operator - (Matrix right_matrix);
     Matrix operator * (const int& right_num);
-    Matrix operator * (Matrix right_matrix);
+    Matrix operator * (Matrix& right_matrix);
+    Matrix& operator = (Matrix& right_matrix);
+    bool operator == (Matrix& right_matrix);
 
     // Деструктор
     ~Matrix();
