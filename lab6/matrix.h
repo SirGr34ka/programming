@@ -28,7 +28,10 @@ class Matrix
     int max();
 
     // Скалярное произведение матриц
-    int dotProduct(Matrix& left_matrix, Matrix& right_matrix, const size_t& row_offset, const size_t& column_offset);
+    int dotProduct(Matrix& right_matrix, const size_t& row_offset, const size_t& column_offset);
+
+    // Часть матрицы
+    Matrix getPatch(Matrix& input_matrix, const size_t& row_offset, const size_t& column_offset);
 
     // Перегрузка операторов
     Matrix operator + (Matrix right_matrix);

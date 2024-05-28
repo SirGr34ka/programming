@@ -1,5 +1,5 @@
 #include <iostream>
-#include "convolution.h"
+#include "max_pooling.h"
 
 int main(int, char**)
 {
@@ -39,10 +39,9 @@ int main(int, char**)
     Matrix* matrix_1_ptr = &matrix_1;
     Matrix* matrix_2_ptr = &matrix_2;
 
-    // Свертка
-    Convolution convolution(matrix_1_ptr, matrix_2_ptr);
+    MaxPooling max_pooling(matrix_1_ptr, matrix_2_ptr);
 
-    Matrix feature_map = convolution.getFeatureMap();
+    Matrix feature_map = max_pooling.getFeatureMap();
 
     std::cout << "Feature map:" << std::endl;
     std::cout << feature_map;
