@@ -4,6 +4,8 @@
 
 class Matrix
 {
+    protected:
+    
     size_t rows;
     size_t columns;
     int** matrix;
@@ -24,6 +26,9 @@ class Matrix
 
     // Поиск максимального значения
     int max();
+
+    // Скалярное произведение матриц
+    int dotProduct(Matrix& left_matrix, Matrix& right_matrix, const size_t& row_offset, const size_t& column_offset);
 
     // Перегрузка операторов
     Matrix operator + (Matrix right_matrix);

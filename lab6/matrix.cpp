@@ -76,6 +76,29 @@ int Matrix::max()
     return max_num;
 }
 
+int Matrix::dotProduct(Matrix& left_matrix, Matrix& right_matrix, const size_t& row_offset = 0, const size_t& column_offset = 0)
+{
+    int res = 0;
+
+    const size_t m = right_matrix.getRows();
+    const size_t n = right_matrix.getColumns();
+    int** right_matrix_ptr = right_matrix.getMatrix();
+    int** left_matrix_ptr = left_matrix.getMatrix();
+
+    for (size_t i = 0; i < m; ++i)
+    {
+        int* left_row = left_matrix_ptr[i + row_offset];
+        int* right_row = right_matrix_ptr[i];
+
+        for (size_t j = 0; j < n; ++j)
+        {
+            res += left_row[j + column_offset] * right_row[j];
+        }
+    }
+
+    return res;
+}
+
 Matrix Matrix::operator + (Matrix right_matrix)
 {
     const size_t m = rows;
