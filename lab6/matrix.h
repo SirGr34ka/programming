@@ -12,15 +12,42 @@ class Matrix
 
     public:
 
-    // Конструкторы
+    /**
+     * @brief
+     * Конструктор класса по умолчанию
+     * 
+     * @param m
+     * количество строк матрицы
+     * 
+     * @param n
+     * количество столбцов матрицы
+    */
     Matrix();
+
+    /**
+     * @brief
+     * Конструктор класса
+     * 
+     * @param m
+     * количество строк матрицы
+     * 
+     * @param n
+     * количество столбцов матрицы
+    */
     Matrix(const int& m, const int& n);
 
-    // Конструктор копирования
+    /**
+     * @brief
+     * Конструктор копирования
+     * 
+     * @param copied_matrix
+     * скоп
+    */
     Matrix(Matrix& copied_matrix);
 
     // Гетеры
     int** getMatrix();
+    const int** getMatrix() const;
     int getRows();
     int getColumns();
 
@@ -37,7 +64,7 @@ class Matrix
     Matrix operator + (Matrix right_matrix);
     Matrix operator - (Matrix right_matrix);
     Matrix operator * (const int& right_num);
-    Matrix operator * (Matrix& right_matrix);
+    Matrix operator * (const Matrix& right_matrix) const;
     Matrix& operator = (Matrix& right_matrix);
     bool operator == (Matrix& right_matrix);
 

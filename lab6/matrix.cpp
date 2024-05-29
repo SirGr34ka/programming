@@ -1,17 +1,8 @@
 #include <iostream>
 #include "matrix.h"
 
-Matrix::Matrix()
+Matrix::Matrix() : Matrix(2, 2)
 {
-    rows = 2;
-    columns = 2;
-
-    matrix = new int* [rows];
-        
-    for (size_t i = 0; i < rows; ++i)
-    {
-        matrix[i] = new int [columns]{};
-    }
 }
 
 Matrix::Matrix(const int& m, const int& n)
@@ -204,6 +195,10 @@ Matrix Matrix::operator * (Matrix& right_matrix)
 
 Matrix& Matrix::operator = (Matrix& right_matrix)
 {
+    if( this == &right_matrix )
+    {
+        return *this;
+    }
     const size_t m = rows;
     const size_t n = columns;
     int** right_matrix_ptr = right_matrix.getMatrix();
