@@ -2,8 +2,13 @@
 
 #include "clean_room.h"
 
-size_t who_is_going_to_clean_the_room(const size_t n, const size_t time)
+size_t who_is_going_to_clean_the_room(const int n, const int time)
 {
+    if ( n <= 0 || time < 0 )
+    {
+        return 0;
+    }
+
     size_t index = 0;
     bool flag = 0; // Флаг направления, 0 - справа налево, 1 - слева направо
 
