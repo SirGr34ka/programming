@@ -1,21 +1,31 @@
 #include <gtest/gtest.h>
 
-#include "equation_solution.h"
+#include "timing_difference.h"
 
 // Проверка на верный ввод
-TEST( TestEquation, correct_equation )
+TEST( TestDifference, correct_input )
 {
-    EXPECT_EQ( getSolution( "x+2x+1-2=6+x-1" ), "x=3" );
+    std::vector<std::string> timings{ "14:33" , "15:45" , "15:55" , "13:10" };
+    EXPECT_EQ( minDifference( timings ), 10 );
 }
 
-// Проверка на верный вывод бесконечного числа решений
-TEST( TestEquation, infinite_enquation )
+// Проверка на вывод нуля
+TEST( TestDifference, zero_output )
 {
-    EXPECT_EQ( getSolution( "5+x-2x=15-x-10" ), "Infinite" );
+    std::vector<std::string> timings{ "14:33" , "15:45" , "15:45" , "13:10" };
+    EXPECT_EQ( minDifference( timings ), 0 );
 }
 
-// Проверка на верный вывод отсутствия решений
-TEST( TestEquation, no_solution_enquation )
+// Проверка на ввод пустого вектора
+TEST( TestDifference, empty_vector )
 {
-    EXPECT_EQ( getSolution( "5x+3+9-3x=2x+4-5" ), "NO" );
+    std::vector<std::string> timings{ };
+    EXPECT_EQ( minDifference( timings ), -1 );
+}
+
+// Проверка на неверный формат
+TEST( TestDifference, wrong_input )
+{
+    std::vector<std::string> timings{ "14:33" , "15:59" , "15:66" , "13:10" };
+    EXPECT_EQ( minDifference( timings ), -1 );
 }
