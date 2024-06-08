@@ -1,6 +1,6 @@
 #include "equation_solution.h"
 
-std::string getSolution( std::string equation )
+std::string getSolution( const std::string& equation )
 {
     int x_multiplier = 0, summary = 0, temp_num;
     std::string temp = "";

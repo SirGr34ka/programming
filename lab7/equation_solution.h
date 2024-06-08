@@ -14,4 +14,4 @@
  * Если решения нет, то возвращает "NO".
  * Если бесконечное множество решений, то возвращает "Infinite".
 */
-std::string getSolution( std::string equation );
+std::string getSolution( const std::string& equation );
