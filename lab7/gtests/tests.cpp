@@ -1,31 +1,22 @@
 #include <gtest/gtest.h>
 
-#include "timing_difference.h"
+#include "2d_mesh.h"
 
 // Проверка на верный ввод
-TEST( TestDifference, correct_input )
+TEST( TestMesh , correct_input )
 {
-    std::vector<std::string> timings{ "14:33" , "15:45" , "15:55" , "13:10" };
-    EXPECT_EQ( minDifference( timings ), 10 );
+    ASSERT_TRUE( is_it_possible_to_get( 4 , 5 ) );
 }
 
-// Проверка на вывод нуля
-TEST( TestDifference, zero_output )
+// Проверка на верный вывод, где входные данные не являются степенями двойки
+TEST( TestMesh , not_power_of_two_correct_output )
 {
-    std::vector<std::string> timings{ "14:33" , "15:45" , "15:45" , "13:10" };
-    EXPECT_EQ( minDifference( timings ), 0 );
+    ASSERT_TRUE( is_it_possible_to_get( 9 , 5 ) );
 }
 
-// Проверка на ввод пустого вектора
-TEST( TestDifference, empty_vector )
+// Проверка на ложный вывод
+TEST( TestMesh , false_output )
 {
-    std::vector<std::string> timings{ };
-    EXPECT_EQ( minDifference( timings ), -1 );
+    ASSERT_FALSE( is_it_possible_to_get( 0 , 3 ) );
 }
 
-// Проверка на неверный формат
-TEST( TestDifference, wrong_input )
-{
-    std::vector<std::string> timings{ "14:33" , "15:59" , "15:66" , "13:10" };
-    EXPECT_EQ( minDifference( timings ), -1 );
-}
