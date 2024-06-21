@@ -4,19 +4,21 @@
 
 int main( int , char** )
 {
-    enrolled( "../students.txt" );
+    HashTable products( 5 );
 
-    std::string lastname;
+    std::cout << "Is table empty: " << products.isEmpty() << std::endl;
 
-    for ( size_t i = 0 ; i < 5 ; ++i )
-    {
-        std::cout << "Input student's lastname: ";
-        std::cin >> lastname;
+    products.pushPrice( "brics" , 169 );
+    products.pushPrice( "cement" , 69 );
+    products.pushPrice( "wood" , 79 );
 
-        unenrolled( lastname );
-    }
+    std::cout << "Cement price: " << products.searchPrice( "cement" ) << std::endl;
 
-    output();
+    products.popPrice( "cement" );
+
+    std::cout << "Cement price: " << products.searchPrice( "cement" ) << std::endl;
+    std::cout << "Table capacity: " << products.getCapacity() << std::endl;
+    std::cout << "Is table empty: " << products.isEmpty() << std::endl;
 
     return 0;
 }
