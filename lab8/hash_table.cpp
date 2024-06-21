@@ -1,87 +1,67 @@
 #include <math.h>
+#include <fstream>
 
 #include "hash_table.h"
 
-HashTable::HashTable()
-{
-    prices = new size_t [ hash_value ];
-}
+const size_t hash_value = 40;
+size_t duplicates = 0;
+size_t voters_count = 0;
+std::vector< size_t > voters( hash_value );
+std::string lastnames = "";
 
-HashTable::HashTable( const size_t size )
-{
-    this->size = size;
-
-    hash_value = ( size_t )( size * 1.5 );
-    prices = new size_t [ hash_value ];
-}
-
-size_t HashTable::getHash( const std::string& str ) const
+size_t getHash( const std::string& str )
 {
     size_t hash = 0;
 
     for ( size_t i = 0 ; i < str.size() ; ++i )
     {
-        hash += ( str[i] * ( size_t )( pow( log( i + 1488 ) , i ) ) ) % 100000;
+        hash += ( str[i] * ( size_t )( pow( log( i + 1488 ) , i ) ) ) % 100;
     }
 
     return hash % hash_value;
 }
 
-void HashTable::pushPrice( const std::string& product , const size_t price )
+void enrolled( const std::string& file_path )
 {
-    size_t hash = getHash( product );
-    prices[ hash ] = price;
-    ++capacity;
+    std::ifstream file( file_path );
+    std::string lastname;
+
+    if ( file.is_open() )
+    {
+        while ( std::getline( file , lastname ) )
+        {
+            unenrolled( lastname );
+        }
+    }
+
+    file.close();
 
     return;
 }
 
-void HashTable::popPrice( const std::string& product )
+void unenrolled( const std::string& lastname )
 {
-    if ( capacity == 0 )
-    {
-        std::cout << "Can't delete position in empty table!" << std::endl;
-        return;
-    }
+    size_t hash = getHash( lastname );
+    voters[ hash ] += 1;
     
-    size_t hash = getHash( product );
-
-    if ( prices[ hash ] == 0 )
+    if ( voters[ hash ] > 1 )
     {
-        std::cout << "No position to delete!" << std::endl;
-        return;
+        duplicates += 1;
     }
-
-    prices[ hash ] = 0;
-    --capacity;
+    else
+    {
+        voters_count += 1;
+        lastnames += lastname + " ";
+    }
 
     return;
 }
 
-size_t HashTable::searchPrice( const std::string& product ) const
+void output()
 {
-    size_t hash = getHash( product );
-    size_t price = prices[ hash ];
+    std::cout << "Number of voters: " << voters_count << std::endl;
+    std::cout << "Duplicates: " << duplicates << std::endl;
+    std::cout << "List of voters: " << lastnames << std::endl;
 
-    if ( price == 0 )
-    {
-        std::cout << "No position to delete!" << std::endl;
-    }
-
-    return price;
-}
-
-bool HashTable::isEmpty() const
-{
-    return capacity == 0;
-}
-
-size_t HashTable::getCapacity() const
-{
-    return capacity;
-}
-
-HashTable::~HashTable()
-{
-    delete[] prices;
+    return;
 }
