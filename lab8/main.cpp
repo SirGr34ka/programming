@@ -8,12 +8,17 @@ int main( int , char** )
 
     std::string lastname;
 
-    while ( lastname == "end" )
+    while ( true )
     {
-        unenrolled( lastname );
-        
         std::cout << "Input student's lastname: ";
         std::cin >> lastname;
+
+        if ( lastname == "end" )
+        {
+            break;
+        }
+
+        unenrolled( lastname );
     }
 
     output();
