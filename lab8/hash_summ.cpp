@@ -39,7 +39,7 @@ std::string getHashSumm( const std::string& file_path )
 
 void changePixel( cv::Mat &image )
 {
-    image.at< cv::Vec3b >( 30 , 30 )[0] = 0;
+    image.at< cv::Vec3b >( 50 , 50 )[0] = 0;
 
     return;
 }

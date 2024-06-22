@@ -22,4 +22,4 @@ std::string getHashSumm( const std::string& file_path );
  * @param image
  * изображение
 */
-void changePixel( cv::Mat &image );
+void changePixel( cv::Mat& image );
