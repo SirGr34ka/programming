@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - lab1
-      - feature/github_actions
 
 jobs:
   build:
