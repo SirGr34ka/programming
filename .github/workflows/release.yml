@@ -7,13 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions: write-all
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
+      - run: core.addPath "C:\msys64\mingw64\bin"
       - run: C:\msys64\mingw64.exe
       - run: pacman -S mingw-w64-x86_64-boost
       - run: exit
