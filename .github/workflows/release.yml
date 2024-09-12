@@ -17,14 +17,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - shell: pwsh
-        run: |
-          "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
-          $env:BOOST_INCLUDEDIR = 'C:\msys64\mingw64\include'
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
-        env:
-          CC: gcc
-          CXX: g++
+      - run: |
+          $env:PATH = "C:\msys64\mingw64\bin;C:\msys64\usr\bin;$env:PATH"
+          cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
