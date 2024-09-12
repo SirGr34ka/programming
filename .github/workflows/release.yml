@@ -14,6 +14,7 @@ jobs:
       - shell: msys2 {0}
         run: |
           pacman -S mingw-w64-x86_64-boost
+          y
       - uses: actions/checkout@v3
         with:
           submodules: true
