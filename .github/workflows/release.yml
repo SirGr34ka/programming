@@ -18,8 +18,8 @@ jobs:
         with:
           submodules: true
       - run: echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
-      - run: cmake --build . -lboost
+      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -lboost
+      - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
       - name: Create Release
