@@ -18,6 +18,7 @@ jobs:
         with:
           submodules: true
       - run: $env:Path += ";C:\msys64\mingw64\bin"
+      - run: $env:Path
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
       - run: cmake --build . --target test
