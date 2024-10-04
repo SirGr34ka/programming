@@ -10,16 +10,10 @@ jobs:
     runs-on: windows-latest
     permissions: write-all
     steps:
-      - uses: msys2/setup-msys2@v2
-      - shell: msys2 {0}
-        run: |
-          pacman -S --noconfirm mingw-w64-x86_64-boost
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: |
-          $env:PATH = "C:\msys64\mingw64\bin;C:\msys64\usr\bin;$env:PATH"
-          cmake . -DPATCH_VERSION=${{ github.run_number }}
+      - run: cmake --preset=default
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
