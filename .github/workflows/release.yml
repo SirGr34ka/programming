@@ -17,7 +17,7 @@ jobs:
         
       - name: Build Project
         run: |
-          cmake --preset=default
+          cmake --preset=vcpkg
           cmake --build build
           cmake --build ./build --target package
 
