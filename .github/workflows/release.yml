@@ -15,9 +15,9 @@ jobs:
         with:
           submodules: true
         run: |
-          cmake --preset=default
-          cmake --build build
-          cmake --build ./build --target package
+          - cmake --preset=default
+          - cmake --build build
+          - cmake --build ./build --target package
 
       - name: Create Release
         id: create_release
