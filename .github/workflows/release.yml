@@ -10,10 +10,12 @@ jobs:
     runs-on: windows-latest
     permissions: write-all
     steps:
-      - name: Build Project
+      - name: Create build
         uses: actions/checkout@v3
         with:
           submodules: true
+        
+      - name: Build Project
         run: |
           - cmake --preset=default
           - cmake --build build
