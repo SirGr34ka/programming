@@ -5,6 +5,9 @@
         "name": "vcpkg",
         "generator": "Visual Studio 17 2022",
         "binaryDir": "${sourceDir}/build",
+        "environment": {
+          "VCPKG_ROOT": "C:/vcpkg"
+        },
         "cacheVariables": {
           "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         }
