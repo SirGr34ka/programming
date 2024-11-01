@@ -37,7 +37,6 @@ std::vector<std::string> split(const std::string &str, char d)
     return r;
 }
 
-
 void print_ip_pool( std::vector< std::vector< std::string > >& ip_pool )
 {
     for( auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
@@ -116,63 +115,37 @@ int main(int, char **)
             {
                 while( ip_pool[i++][0] != "46" || ip_pool[i][1] != "70" );
 
-                while( ip_pool[j][0] != "46" || ip_pool[j][1] != "70" )
-                {
-                    --j;
-                }
+                while( ip_pool[--j][0] != "46" || ip_pool[j][1] != "70" );
 
-                return std::make_pair( i , ++j ) ;
+                return std::make_pair( i , ++j );
             }
-            ( 0 , ip_pool.size() - 1 );
+            ( 0 , ip_pool.size() );
     
         ip_pool_46_70.assign( std::next( ip_pool.cbegin() , std::get<0>( begin_end_iters ) ) , std::next( ip_pool.cbegin() , std::get<1>( begin_end_iters ) ) );
 
         print_ip_pool( ip_pool_46_70 );
 
-        // ip = filter(46, 70)
-
-        // 46.70.225.39
-        // 46.70.147.26
-        // 46.70.113.73
-        // 46.70.29.76
-
         // TODO filter by any byte and output
-        // ip = filter_any(46)
+        decltype( ip_pool ) ip_pool_any_46 = [ & ](  )
+        {
+            decltype( ip_pool ) ip_pool_temp{};
 
-        // 186.204.34.46
-        // 186.46.222.194
-        // 185.46.87.231
-        // 185.46.86.132
-        // 185.46.86.131
-        // 185.46.86.131
-        // 185.46.86.22
-        // 185.46.85.204
-        // 185.46.85.78
-        // 68.46.218.208
-        // 46.251.197.23
-        // 46.223.254.56
-        // 46.223.254.56
-        // 46.182.19.219
-        // 46.161.63.66
-        // 46.161.61.51
-        // 46.161.60.92
-        // 46.161.60.35
-        // 46.161.58.202
-        // 46.161.56.241
-        // 46.161.56.203
-        // 46.161.56.174
-        // 46.161.56.106
-        // 46.161.56.106
-        // 46.101.163.119
-        // 46.101.127.145
-        // 46.70.225.39
-        // 46.70.147.26
-        // 46.70.113.73
-        // 46.70.29.76
-        // 46.55.46.98
-        // 46.49.43.85
-        // 39.46.86.85
-        // 5.189.203.46
+            for( auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
+            {
+                for( auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part )
+                {
+                    if ( *ip_part == "46" )
+                    {
+                        ip_pool_temp.push_back( *ip );
+                        break;
+                    }
+                }
+            }
+
+            return ip_pool_temp;
+        }();
+
+        print_ip_pool( ip_pool_any_46 );
     }
     catch(const std::exception &e)
     {
