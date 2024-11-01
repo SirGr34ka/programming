@@ -67,7 +67,7 @@ jobs:
           cmake --preset=vcpkg
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build
-          cmake --build ./msys --target package
+          cmake --build ./vcpkg --target package
 
       - name: Upload Release Asset
         id: upload-release-asset
