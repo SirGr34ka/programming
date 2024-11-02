@@ -26,7 +26,7 @@ int main(int, char **)
         file.close();
 
         // Вывод списков IP адресов
-        print_ip_pool( ip_pool );
+        print_sorted_ip_pool( ip_pool );
         print_ip_pool_1( ip_pool );
         print_ip_pool_46_70( ip_pool );
         print_ip_pool_any_46( ip_pool );
