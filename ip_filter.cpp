@@ -118,7 +118,7 @@ void print_ip_pool_any_46( std::vector< std::vector< std::string > > ip_pool )
 {
     decltype( ip_pool ) ip_pool_any_46 = [ & ]()
     {
-        decltype( ip_pool ) ip_pool_temp{};
+        decltype( ip_pool ) ip_pool_temp;
 
         for( auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
