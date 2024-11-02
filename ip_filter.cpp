@@ -37,7 +37,9 @@ std::vector<std::string> split(const std::string &str, char d)
     return r;
 }
 
-void print_ip_pool( std::vector< std::vector< std::string > >& ip_pool )
+template< typename T >
+
+void print_ip_pool( std::vector< std::vector< T > >& ip_pool )
 {
     for( auto ip = ip_pool.cbegin() ; ip != ip_pool.cend() ; ++ip )
     {
@@ -118,10 +120,7 @@ void print_ip_pool_any_46( std::vector< std::vector< std::string > > ip_pool )
 {
     decltype( ip_pool ) ip_pool_any_46 = [ & ]()
     {
-        std::vector<std::string> hz{ "1" , "1" , "1" , "1" };
-        decltype( ip_pool ) ip_pool_temp{ hz };
-
-        ip_pool_temp.pop_back();
+        std::vector< std::vector < std::string > >  ip_pool_temp{};
 
         for( auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
