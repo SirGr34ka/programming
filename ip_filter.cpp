@@ -37,9 +37,7 @@ std::vector<std::string> split(const std::string &str, char d)
     return r;
 }
 
-template< typename T >
-
-void print_ip_pool( std::vector< std::vector< T > >& ip_pool )
+void print_ip_pool( std::vector< std::vector< std::string > >& ip_pool )
 {
     for( auto ip = ip_pool.cbegin() ; ip != ip_pool.cend() ; ++ip )
     {
