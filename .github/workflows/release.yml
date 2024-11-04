@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature
+      - lab2
 
 jobs:
   create_release:
