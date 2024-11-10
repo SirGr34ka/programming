@@ -35,10 +35,9 @@ jobs:
       
       - name: Build Project
         run: |
-          sudo apt-get update && sudo apt-get install libboost-test-dev -y
+          sudo apt-get update && sudo apt-get
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build .
-          cmake --build . --target test
           cmake --build . --target package
 
       - name: Upload Release Asset
@@ -64,7 +63,7 @@ jobs:
         
       - name: Build Project
         run: |
-          cmake --preset=vcpkg
+          cmake --preset=MSVC
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build
           cmake --build . --target package
