@@ -3,28 +3,24 @@ cmake_minimum_required(VERSION 3.10)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
-project(ip_filter VERSION ${PROJECT_VESRION})
+project(containers VERSION ${PROJECT_VESRION})
 
-add_executable(ip_filter_cli main.cpp ip_filter.cpp)
+add_executable(containers main.cpp containers.cpp)
 
-set_target_properties(ip_filter_cli PROPERTIES
-    CXX_STANDARD 14
+set_target_properties(containers PROPERTIES
+    CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 
 if (MSVC)
-    target_compile_options(ip_filter_cli PRIVATE
+    target_compile_options(containers PRIVATE
         /W4
     )
 else ()
-    target_compile_options(ip_filter_cli PRIVATE
+    target_compile_options(containers PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
-
-
-
-install(TARGETS ip_filter_cli RUNTIME DESTINATION bin)
 
 if (UNIX)
     set(CPACK_GENERATOR DEB)

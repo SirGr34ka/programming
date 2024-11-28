@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature
+      - lab3
 
 jobs:
   create_release:
