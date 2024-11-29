@@ -35,7 +35,7 @@ class SequenceContainer
      * @param element
      * элемент, который нужно вставить
      */
-    void push_back( T& element )
+    void push_back( const T& element )
     {
         std::shared_ptr< T[] > temp;
 
@@ -72,78 +72,83 @@ class SequenceContainer
      * @param element
      * элемент, который нужно вставить
      */
-    void insert( size_t index , T& element )
+    void insert( const size_t index , const T& element )
     {
         if( index > size_ )
         {
             throw "Out of size";
         }
 
+        if ( index == size_ )
+        {
+            push_back( element );
+
+            return;
+        }
+
         std::shared_ptr< T[] > temp;
 
         if ( capacity_ >= ( size_ + 1 ) )
         {
-            if ( index == size_ )
-            {
-                container[ size_++ ] = element;
-
-                return;
-            }
-
             temp = std::make_shared< T[] >( capacity_ );
-
-            for ( size_t i = 0 , j = 0 ; i < size_ ; ++i , ++j )
-            {
-                if ( i == index )
-                {
-                    temp[j++] = element;
-                    ++size_;
-                }
-
-                temp[j] = container[i];
-            }
         }
         else
         {
             size_t new_capacity = (size_t)std::round( capacity_ * EXPANSION_COEFFICIENT );
 
-            capacity_ = new_capacity;
-
-            if ( index == size_ )
-            {
-                container[ size_++ ] = element;
-
-                return;
-            }
-
             temp = std::make_shared< T[] >( new_capacity );
 
-            for ( size_t i = 0 , j = 0 ; i < size_ ; ++i , ++j )
-            {
-                if ( i == index )
-                {
-                    temp[j++] = element;
-                }
+            capacity_ = new_capacity;
+        }
 
-                temp[j] = container[i];
+        for ( size_t i = 0 , j = 0 ; i < size_ ; ++i , ++j )
+        {
+            if ( i == index )
+            {
+                temp[i++] = element;
+                ++size_;
             }
 
-            ++size_;
-
-            container = temp;
+            temp[i] = container[j];
         }
+
+        container = temp;
 
         return;
     }
 
-    void erase( size_t index , size_t size_ = 1 )
+    /**
+     * @brief
+     * Метод удаления элемента(-ов)
+     * 
+     * @param index
+     * индекс, с которого нужно начать удалять элемент(-ы)
+     * 
+     * @param size_
+     * количество элементов для удаления (начальное значение равно 1)
+     */
+    void erase( const size_t index , const size_t size_ = 1 )
     {
-        if ( ( index + size_ ) > this.size_ )
+        if ( ( index + size_ ) > this->size_ )
         {
             throw "Out of size";
         }
 
-        std::shared_ptr< T[] > temp;
+        std::shared_ptr< T[] > temp = std::make_shared< T[] >( capacity_ );
+
+        for ( size_t i = 0 ; i < index ; ++i )
+        {
+            temp[i] = container[i];
+        }
+
+        for ( size_t i = index , j = ( index + size_ ) ; j < this->size_ ; ++i , ++j )
+        {
+            temp[i] = container[j];
+        }
+
+        this->size_ -= size_;
+
+        container = temp;
 
         return;
     }
@@ -182,8 +187,13 @@ class SequenceContainer
      * @return
      * Возвращает элемент, находящийся под заданным индексом
      */
-    auto operator [] ( size_t index )
+    auto& operator [] ( const size_t index ) const
     {
+        if ( index >= size_ )
+        {
+            throw "Out of size";
+        }
+
         return container[ index ];
     }
 
@@ -197,15 +207,214 @@ class SequenceContainer
     }
 };
 
+template< typename T >
+struct Node
+{
+    std::shared_ptr< Node > next;
+    std::shared_ptr< Node > preveous; 
+    T data;
+};
+
+template< typename T >
 class ListContainer
 {
+    std::shared_ptr< Node< T > > head;
+    std::shared_ptr< Node< T > > tail;
+    size_t size_;
+
     public:
 
-    ListContainer();
-    void push_back();
-    void insert();
-    void erase();
-    auto size();
-    auto operator [] ( size_t index );
-    ~ListContainer();
+    /**
+     * @brief
+     * Конструктор класса
+     */
+    ListContainer()
+    {
+        head = nullptr;
+        tail = nullptr;
+        size_ = 0;
+    }
+
+    /**
+     * @brief
+     * Метод добавления элемента в конец
+     * 
+     * @param element
+     * элемент, который нужно вставить
+     */
+    void push_back( const T& element )
+    {
+        std::shared_ptr< Node< T > > node = std::make_shared< Node< T > >();
+
+        node->data = element;
+
+        if ( size_ == 0 )
+        {
+            head = node;
+        }
+        else
+        {
+            tail->next = node;
+        }
+
+        tail = node;
+        ++size_;
+    }
+
+    /**
+     * @brief
+     * Метод вставки элемента в произвольную позицию
+     * 
+     * @param index
+     * индекс, на который нужно вставить элемент
+     * @param element
+     * элемент, который нужно вставить
+     */
+    void insert( const size_t index , const T& element )
+    {
+        if( index > size_ )
+        {
+            throw "Out of size";
+        }
+
+        if ( index == size_ )
+        {
+            push_back( element );
+
+            return;
+        }
+
+        std::shared_ptr< Node< T > > new_node = std::make_shared< Node< T > >();
+
+        new_node->data = element;
+
+        if ( index == 0 )
+        {
+            new_node->next = head;
+            head = new_node;
+
+            ++size_;
+
+            return;
+        }
+
+        std::shared_ptr< Node< T > > node_before = head;
+
+        for ( size_t i = 0 ; i < ( index - 1 ) ; ++i )
+        {
+            node_before = node_before->next;
+        }
+
+        std::shared_ptr< Node< T > > node_after = node_before->next;
+        node_before->next = new_node;
+        new_node->next = node_after;
+
+        ++size_;
+
+        return;
+    }
+
+    /**
+     * @brief
+     * Метод удаления элемента(-ов)
+     * 
+     * @param index
+     * индекс, с которого нужно начать удалять элемент(-ы)
+     * 
+     * @param size_
+     * количество элементов для удаления (начальное значение равно 1)
+     */
+    void erase( const size_t index , const size_t size_ = 1 )
+    {
+        if ( ( index + size_ ) > this->size_ )
+        {
+            throw "Out of size";
+        }
+
+        std::shared_ptr< Node< T > > node_after;
+
+        if ( index == 0 )
+        {
+            node_after = head;
+
+            for ( size_t i = 0 ; i < size_ ; ++i )
+            {
+                node_after = node_after->next;
+            }
+
+            head = node_after;
+
+            this->size_ -= size_;
+
+            return;
+        }
+
+        std::shared_ptr< Node< T > > node_before = head;
+
+        for ( size_t i = 0 ; i < ( index - 1 ) ; ++i )
+        {
+            node_before = node_before->next;
+        }
+
+        node_after = node_before->next;
+
+        for ( size_t i = 0 ; i < size_ ; ++i )
+        {
+            node_after = node_after->next;
+        }
+
+        node_before->next = node_after;
+
+        this->size_ -= size_;
+
+        return;
+    }
+
+    /**
+     * @brief
+     * Получение текущего количества элементов в контейнере
+     * 
+     * @return
+     * Возвращает текущее количество элементов в контейнере
+     */
+    auto size() const
+    {
+        return size_;
+    }
+
+    /**
+     * @brief
+     * Переопределение оператора []
+     * 
+     * @param index
+     * индекс элемента
+     * 
+     * @return
+     * Возвращает элемент, находящийся под заданным индексом
+     */
+    auto& operator [] ( const size_t index ) const
+    {
+        if ( index >= size_ )
+        {
+            throw "Out of size";
+        }
+
+        std::shared_ptr< Node< T > > node = head;
+
+        for ( size_t i = 0 ; i < index ; ++i )
+        {
+            node = node->next;
+        }
+
+        return node->data;
+    }
+
+    /**
+     * @brief
+     * Деструктор класса
+     */
+    ~ListContainer()
+    {
+
+    }
 };
