@@ -37,9 +37,6 @@ jobs:
       - name: Build Project
         run: |
           sudo apt-get update && sudo apt-get install ninja-build -y
-          cmake . -DPATCH_VERSION=${{ github.run_number }}
-          cmake --preset=GCC
-          cmake --build build/GCC --target package
 
       - name: Upload Release Asset
         id: upload-release-asset
@@ -64,8 +61,8 @@ jobs:
         
       - name: Build Project
         run: |
-          cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --preset=MSVC
+          cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/MSVC --target package
 
       - name: Upload Release Asset
