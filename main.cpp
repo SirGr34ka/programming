@@ -8,7 +8,7 @@ int main(int, char **)
 {
     try
     {
-        ListContainer< std::vector< int > > container;
+        SequenceContainer< std::vector< int > > container;
 
         std::vector< int > vec1{ 1 , 11 , 111 };
         std::vector< int > vec2{ 2 , 22 , 222 };
@@ -30,13 +30,33 @@ int main(int, char **)
 
             std::cout << std::endl;
         }
-        container.erase( 0 , 5 );
 
-        std::cout << container.size() << std::endl;
+        SequenceContainer new_container = std::move( container );
 
-        for ( size_t i = 0 ; i < container.size() ; ++i )
+        std::cout << new_container.size() << std::endl;
+
+        for ( size_t i = 0 ; i < new_container.size() ; ++i )
         {
-            for ( int num : container[i] )
+            for ( int num : new_container[i] )
+            {
+                std::cout << num << " ";
+            }
+
+            std::cout << std::endl;
+        }
+
+        for ( int num : *container.begin() )
+        {
+            std::cout << num << " ";
+        }
+
+        std::cout << std::endl;
+
+        *container.begin() = vec2;
+
+        for ( size_t i = 0 ; i < new_container.size() ; ++i )
+        {
+            for ( int num : new_container[i] )
             {
                 std::cout << num << " ";
             }

@@ -15,6 +15,33 @@ class SequenceContainer
 
     public:
 
+    struct iterator
+    {
+        size_t index;
+        SequenceContainer* sequence_container;
+
+        iterator( size_t index_ , SequenceContainer* sequence_container_ )
+        {
+            index = index_;
+            sequence_container = sequence_container_;
+        }
+
+        auto& operator * ()
+        {
+            return sequence_container->container[ index ];
+        }
+    };
+
+    auto begin()
+    {
+        return iterator( 0 , this );
+    }
+
+    auto end()
+    {
+        return iterator( size_ , this );
+    }
+
     /**
      * @brief
      * Конструктор класса
@@ -26,6 +53,39 @@ class SequenceContainer
 
         // Умный указатель на контейнер
         container = std::make_shared< T[] >( capacity_ );
+    }
+
+    /**
+     * @brief
+     * Конструктор перемещения
+     */
+    SequenceContainer( SequenceContainer&& old_container )
+    {
+        container = old_container.container;
+        capacity_ = old_container.capacity_;
+        size_ = old_container.size_;
+    }
+
+    /**
+     * @brief
+     * Оператор присваивания с перемещением
+     * 
+     * @param old_container
+     * старый контейнер, из которого перемещаем
+     * 
+     * @return
+     * Возвращает ссылку на новый контейнер
+     */
+    auto operator = ( SequenceContainer&& old_container )
+    {
+        if ( &old_container != this )
+        {
+            container = old_container.container;
+            size_ = old_container.size_;
+            capacity_ = old_container.capacity_;
+        }
+
+        return *this;
     }
 
     /**
