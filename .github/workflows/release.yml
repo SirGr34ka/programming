@@ -39,8 +39,8 @@ jobs:
           sudo apt-get update
           cmake --preset=GCC
           cmake . -DPATCH_VERSION=${{ github.run_number }}
-          cmake --build ./GCC
-          cmake --build ./GCC --target package
+          cmake --build build/GCC
+          cmake --build build/GCC --target package
 
       - name: Upload Release Asset
         id: upload-release-asset
@@ -67,8 +67,8 @@ jobs:
         run: |
           cmake --preset=MSVC
           cmake . -DPATCH_VERSION=${{ github.run_number }}
-          cmake --build ./MSVC
-          cmake --build ./MSVC --target package
+          cmake --build build/MSVC
+          cmake --build build/MSVC --target package
 
       - name: Upload Release Asset
         id: upload-release-asset
