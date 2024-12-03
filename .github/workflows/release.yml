@@ -36,7 +36,7 @@ jobs:
       
       - name: Build Project
         run: |
-          sudo apt-get update
+          sudo apt-get update && sudo apt-get install ninja-build -y
           cmake --preset=GCC
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/GCC
@@ -50,7 +50,7 @@ jobs:
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url}}
           asset_name: containers-0.0.${{ github.run_number }}-Linux.deb
-          asset_path: ./containers-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: build/GCC/containers-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
 
   release_assets_win:
@@ -77,6 +77,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./containers-0.0.${{ github.run_number }}-win64.zip
+          asset_path: build/MSVC/containers-0.0.${{ github.run_number }}-win64.zip
           asset_name: containers-0.0.${{ github.run_number }}-win64.zip
           asset_content_type: application/zip
