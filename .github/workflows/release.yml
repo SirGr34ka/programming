@@ -37,7 +37,7 @@ jobs:
       - name: Build Project
         run: |
           sudo apt-get update && sudo apt-get install ninja-build -y
-          echo "CC=gcc-12"
+          echo "CXX=g++-12" >> $GITHUB_ENV
           cmake --preset=GCC
           cmake build/GCC -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/GCC --target package
