@@ -26,8 +26,24 @@ class SequenceContainer
             sequence_container = sequence_container_;
         }
 
-        auto& operator * ()
+        auto& operator ++ ()
         {
+            index += 1;
+            return *this;
+        }
+
+        auto operator != ( const SequenceContainer::iterator& container_iter ) const
+        {
+            return container_iter.index != index;
+        }
+
+        auto& operator * () const
+        {
+            if ( index >= sequence_container->size_ )
+            {
+                throw "Out of size";
+            }
+
             return sequence_container->container[ index ];
         }
     };
@@ -283,6 +299,60 @@ class ListContainer
     size_t size_;
 
     public:
+
+    struct iterator
+    {
+        size_t index;
+        ListContainer* list_container;
+        std::shared_ptr< Node< T > > node;
+
+        iterator( size_t index_ , ListContainer* list_container_ )
+        {
+            index = index_;
+            list_container = list_container_;
+
+            node = list_container_->head;
+
+            for ( size_t i = 0 ; i < index ; ++i )
+            {
+                node = node->next;
+            }
+        }
+
+        auto& operator ++ ()
+        {
+            index += 1;
+
+            node = node->next;
+
+            return *this;
+        }
+
+        auto operator != ( const ListContainer::iterator& container_iter )
+        {
+            return container_iter.index != index;
+        }
+
+        auto& operator * ()
+        {
+            if ( index >= list_container->size_ )
+            {
+                throw "Out of size";
+            }
+
+            return node->data;
+        }
+    };
+
+    auto begin()
+    {
+        return iterator( 0 , this );
+    }
+
+    auto end()
+    {
+        return iterator( size_ , this );
+    }
 
     /**
      * @brief

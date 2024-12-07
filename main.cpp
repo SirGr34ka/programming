@@ -8,60 +8,96 @@ int main(int, char **)
 {
     try
     {
-        SequenceContainer< std::vector< int > > container;
+        SequenceContainer< int > sequence_container;
 
-        std::vector< int > vec1{ 1 , 11 , 111 };
-        std::vector< int > vec2{ 2 , 22 , 222 };
-        std::vector< int > vec3{ 3 , 33 , 333 };
-
-        container.push_back( vec1 );
-        container.push_back( vec3 );
-        container.insert( 1 , vec2 );
-        container.insert( 2 , vec2 );
-
-        std::cout << container.size() << std::endl;
-
-        for ( size_t i = 0 ; i < container.size() ; ++i )
+        for ( int i = 0 ; i < 10 ; ++i )
         {
-            for ( int num : container[i] )
-            {
-                std::cout << num << " ";
-            }
-
-            std::cout << std::endl;
+            sequence_container.push_back( i );
         }
 
-        SequenceContainer new_container = std::move( container );
+        std::cout << "Sequence container:" << std::endl;
 
-        std::cout << new_container.size() << std::endl;
-
-        for ( size_t i = 0 ; i < new_container.size() ; ++i )
+        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
         {
-            for ( int num : new_container[i] )
-            {
-                std::cout << num << " ";
-            }
-
-            std::cout << std::endl;
+            std::cout << sequence_container[ i ] << std::endl;
         }
 
-        for ( int num : *container.begin() )
+        std::cout << "sequence_container size: " << sequence_container.size() << std::endl;
+
+        sequence_container.erase( 2 );
+        sequence_container.erase( 4 );
+        sequence_container.erase( 6 );
+
+        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
         {
-            std::cout << num << " ";
+            std::cout << sequence_container[ i ] << std::endl;
+        }
+
+        sequence_container.insert( 0 , 10 );
+
+        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
+        {
+            std::cout << sequence_container[ i ] << std::endl;
+        }
+
+        sequence_container.insert( (size_t)( sequence_container.size() / 2 - 0.5 ) , 20 );
+
+        for ( auto iter = sequence_container.begin() ; iter != sequence_container.end() ; ++iter )
+        {
+            std::cout << *iter << std::endl;
+        }
+
+        sequence_container.push_back( 30 );
+        
+        for ( auto iter = sequence_container.begin() ; iter != sequence_container.end() ; ++iter )
+        {
+            std::cout << *iter << std::endl;
         }
 
         std::cout << std::endl;
 
-        *container.begin() = vec2;
+        //----------------------------------------------------------
 
-        for ( size_t i = 0 ; i < new_container.size() ; ++i )
+        ListContainer< int > list_container;
+
+        for ( int i = 0 ; i < 10 ; ++i )
         {
-            for ( int num : new_container[i] )
-            {
-                std::cout << num << " ";
-            }
+            list_container.push_back( i );
+        }
 
-            std::cout << std::endl;
+        std::cout << "List container:" << std::endl;
+
+        for ( size_t i = 0 ; i < list_container.size() ; ++i )
+        {
+            std::cout << list_container[ i ] << std::endl;
+        }
+
+        std::cout << "list_container size: " << list_container.size() << std::endl;
+
+        for ( size_t i = 0 ; i < list_container.size() ; ++i )
+        {
+            std::cout << list_container[ i ] << std::endl;
+        }
+
+        list_container.insert( 0 , 10 );
+
+        for ( size_t i = 0 ; i < list_container.size() ; ++i )
+        {
+            std::cout << list_container[ i ] << std::endl;
+        }
+
+        list_container.insert( (size_t)( list_container.size() / 2 - 0.5 ) , 20 );
+
+        for ( auto iter = list_container.begin() ; iter != list_container.end() ; ++iter )
+        {
+            std::cout << *iter << std::endl;
+        }
+
+        list_container.push_back( 30 );
+
+        for ( auto iter = list_container.begin() ; iter != list_container.end() ; ++iter )
+        {
+            std::cout << *iter << std::endl;
         }
     }
     catch(const std::exception &e)
