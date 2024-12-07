@@ -22,6 +22,9 @@
             "generator": "Ninja",
             "displayName": "GCC",
             "binaryDir": "${sourceDir}/build/${presetName}",
+            "environment": {
+                "CXX": "g++-12"
+            },
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
                 "CMAKE_C_COMPILER": "gcc",
