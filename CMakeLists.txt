@@ -8,8 +8,6 @@ project(containers VERSION ${PROJECT_VESRION})
 add_executable(containers main.cpp containers.cpp)
 
 set_target_properties(containers PROPERTIES
-    C_STANDARD 20
-    C_STANDARD_REQUIRED ON
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
