@@ -36,7 +36,7 @@ jobs:
       
       - name: Build Project
         run: |
-          sudo apt-get update && sudo apt-get install gcc g++ && sudo apt-get install ninja-build -y
+          sudo apt-get update && sudo apt-get install gcc-14 g++-14 && sudo apt-get install ninja-build -y
           cmake --preset=GCC
           cmake build/GCC -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/GCC --target package
