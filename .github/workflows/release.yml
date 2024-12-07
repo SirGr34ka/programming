@@ -26,7 +26,7 @@ jobs:
 
   release_assets_ubuntu:
     needs: create_release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions: write-all
     steps:
       - name: Use Checkout
@@ -37,6 +37,7 @@ jobs:
       - name: Build Project
         run: |
           sudo apt-get update && sudo apt-get install ninja-build -y
+          echo "CC=gcc-12"
           cmake --preset=GCC
           cmake build/GCC -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/GCC --target package
