@@ -26,18 +26,17 @@ jobs:
 
   release_assets_ubuntu:
     needs: create_release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions: write-all
     steps:
       - name: Use Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           submodules: true
       
       - name: Build Project
         run: |
           sudo apt-get update && sudo apt-get install ninja-build -y
-          ls /usr/bin/g++
           cmake build/GCC -DPATCH_VERSION=${{ github.run_number }}
           cmake --build build/GCC --target package
 
