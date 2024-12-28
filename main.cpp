@@ -1,131 +1,21 @@
 #include <iostream>
 
 #include <vector>
+#include <map>
 
 #include "containers.h"
+#include "allocator.h"
 
 int main(int, char **)
 {
     try
     {
-        SequenceContainer< int > sequence_container;
+        std::map< int , int , std::less< int > Allocator< std::pair< int , int > > > mapchik { { 1 , 2 } , { 3 , 4 } , { 5 , 6 } };
 
-        for ( int i = 0 ; i < 10 ; ++i )
+        for ( auto iter = mapchik.begin() ; iter != mapchik.end() ; ++iter )
         {
-            sequence_container.push_back( i );
+            std::cout << (*iter).first << ';' << (*iter).second << ' ' << std::endl;
         }
-
-        std::cout << "Sequence container:" << std::endl;
-
-        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
-        {
-            std::cout << sequence_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        sequence_container.push_back(14);
-        sequence_container.push_back(25);
-
-        std::cout << "capacity: " << sequence_container.capacity() << std::endl;
-        std::cout << "sequence_container size: " << sequence_container.size() << std::endl;
-
-        sequence_container.push_back(34);
-
-        std::cout << "capacity: " << sequence_container.capacity() << std::endl;
-        std::cout << "sequence_container size: " << sequence_container.size() << std::endl;
-
-        sequence_container.erase( 2 );
-        sequence_container.erase( 4 );
-        sequence_container.erase( 6 );
-
-        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
-        {
-            std::cout << sequence_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        sequence_container.insert( 0 , 10 );
-
-        for ( size_t i = 0 ; i < sequence_container.size() ; ++i )
-        {
-            std::cout << sequence_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        sequence_container.insert( (size_t)( sequence_container.size() / 2 - 0.5 ) , 20 );
-
-        for ( auto iter = sequence_container.begin() ; iter != sequence_container.end() ; ++iter )
-        {
-            std::cout << *iter << " ";
-        }
-
-        std::cout << std::endl;
-
-        sequence_container.push_back( 30 );
-        
-        for ( auto iter = sequence_container.begin() ; iter != sequence_container.end() ; ++iter )
-        {
-            std::cout << *iter << " ";
-        }
-
-        std::cout << std::endl;
-
-        //----------------------------------------------------------
-
-        ListContainer< int > list_container;
-
-        for ( int i = 0 ; i < 10 ; ++i )
-        {
-            list_container.push_back( i );
-        }
-
-        std::cout << "List container:" << std::endl;
-
-        for ( size_t i = 0 ; i < list_container.size() ; ++i )
-        {
-            std::cout << list_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        std::cout << "list_container size: " << list_container.size() << std::endl;
-
-        for ( size_t i = 0 ; i < list_container.size() ; ++i )
-        {
-            std::cout << list_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        list_container.insert( 0 , 10 );
-
-        for ( size_t i = 0 ; i < list_container.size() ; ++i )
-        {
-            std::cout << list_container[ i ] << " ";
-        }
-
-        std::cout << std::endl;
-
-        list_container.insert( (size_t)( list_container.size() / 2 - 0.5 ) , 20 );
-
-        for ( auto iter = list_container.begin() ; iter != list_container.end() ; ++iter )
-        {
-            std::cout << *iter << " ";
-        }
-
-        std::cout << std::endl;
-
-        list_container.push_back( 30 );
-
-        for ( auto iter = list_container.begin() ; iter != list_container.end() ; ++iter )
-        {
-            std::cout << *iter << " ";
-        }
-
-        std::cout << std::endl;
     }
     catch(const std::exception &e)
     {
