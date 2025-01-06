@@ -36,17 +36,18 @@ int main(int, char **)
             std::cout << (*iter).first << ": " << (*iter).second << std::endl;
         }
 
-        std::map< int , int , std::less< int > , Allocator< std::pair< const int , int > > > map2;
+        typedef Allocator< std::pair< const int , int > > Alloc;
+
+        std::map< const int , int , std::less< int > , Alloc > map2;
 
         for ( size_t i = 1 ; i <= MAP_SIZE ; ++i )
         {
-            std::pair< const int , int > temp { i , static_cast< int >( factorial( i ) ) };
-            map2.insert( temp );
+            map2.insert( { i , static_cast< int >( factorial( i ) ) } );
         }
 
         for ( auto iter = map2.begin() ; iter != map2.end() ; ++iter )
         {
-            std::cout << (*iter).first << ": " << (*iter).second << std::endl;
+            std::cout << iter->first << ": " << iter->second << std::endl;
         }
     }
     catch(const std::exception &e)

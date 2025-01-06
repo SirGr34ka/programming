@@ -2,84 +2,58 @@
 
 #include <iostream>
 
-template<class T>
+template< typename T >
 class Allocator 
 {
-    const float EXPANSION_COEFFICIENT = 1.5F;
-
-    T* block_ptr;
-    size_t capacity;
-    size_t offset;
-
-    size_t type_size;
+    void* block_ptr;
 
     public:
 
     typedef T value_type;
 
-    Allocator( size_t capacity_ = 10 )
+    Allocator()
     {
-        capacity = capacity_;
-        block_ptr = static_cast< T* >( operator new( capacity_ * sizeof( T ) ) );
-        offset = 0;
-
-        type_size = sizeof( T );
+        block_ptr = nullptr;
     }
 
     template < class U > 
     Allocator( const Allocator< U >& other )
     {
-        capacity = other.capacity;
-        block_ptr = other.block_ptr;
-        offset = other.offset;
+        block_ptr = nullptr;
     }
 
     T* allocate( size_t count_objects )
     {
-        if ( count_objects <= capacity - offset )
+        if ( !block_ptr )
         {
-            offset += count_objects;
-
-            return block_ptr + offset - count_objects;
+            block_ptr = operator new( 10ull );
         }
 
-        size_t new_capacity = static_cast< size_t >( static_cast< float >( capacity ) * EXPANSION_COEFFICIENT );
-
-        if ( count_objects > new_capacity - offset )
-        {
-            throw std::bad_alloc();
-        }
-
-        T* new_block_ptr = static_cast< T* >( operator new( new_capacity * sizeof( T ) ) );
-
-        for ( size_t i = 0 ; i < offset ; ++i )
-        {
-            *( new_block_ptr + i ) = *( block_ptr + i );
-        }
-
-        operator delete( block_ptr , offset );
-
-        block_ptr = new_block_ptr;
-        capacity = new_capacity;
-        offset += count_objects;
-
-        return block_ptr + offset - count_objects;
+        return static_cast< T* >( operator new( count_objects * sizeof( T ) ) );
     }
 
     void deallocate( T* ptr , size_t count_objects )
     {
+        if ( block_ptr )
+        {
+            operator delete( block_ptr );
+            block_ptr = nullptr;
+        }
+
         operator delete( ptr , count_objects * sizeof( T ) );
     }
+
+    ~Allocator(){}
 };
 
-template<class T, class U>
-bool operator==( const Allocator<T>& , const Allocator<U>& )
+template< typename T , typename U >
+bool operator ==( const Allocator< T >& , const Allocator< U >& )
 {
     return true;
 }
 
-template<class T, class U>
-bool operator!=( const Allocator<T>& , const Allocator<U>& )
+template< typename T , typename U >
+bool operator !=( const Allocator< T >& , const Allocator< U >& )
 {
     return false;
 }

@@ -5,7 +5,7 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
 project(allocator VERSION ${PROJECT_VESRION})
 
-add_executable(allocator main.cpp containers.cpp allocator.cpp)
+add_executable(allocator main.cpp allocator.cpp )
 
 set_target_properties(allocator PROPERTIES
     CXX_STANDARD 20
