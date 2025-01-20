@@ -36,7 +36,7 @@ int main(int, char **)
             std::cout << (*iter).first << ": " << (*iter).second << std::endl;
         }
 
-        typedef Allocator< std::pair< const int , int > > Alloc;
+        typedef Allocator< std::pair< const int , int > , 10ull > Alloc;
 
         std::map< const int , int , std::less< int > , Alloc > map2;
 
