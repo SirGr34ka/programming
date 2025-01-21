@@ -6,18 +6,20 @@
 
 #include <tuple>
 
-template < typename T , size_t SIZE >
+template < typename T >
 struct Allocator
 {
+    size_t size_;
     size_t size_in_bytes;
     std::shared_ptr< void* > pool_shared_ptr;
     std::shared_ptr< bool[] > chunks_shared_ptr;
     
     typedef T value_type;
 
-    Allocator()
+    Allocator( size_t size )
     {
-        size_in_bytes = ( SIZE + 2ull ) * sizeof( T );
+        size_ = size + 33ull;
+        size_in_bytes = ( size_ ) * ( sizeof( T ) + 32ull );
         pool_shared_ptr = std::make_shared< void* >();
         *pool_shared_ptr = operator new( size_in_bytes );
 
@@ -26,9 +28,9 @@ struct Allocator
             throw std::bad_alloc();
         }
 
-        chunks_shared_ptr = std::make_shared< bool[] >( SIZE + 2ull );
+        chunks_shared_ptr = std::make_shared< bool[] >( size_ );
 
-        for ( size_t i = 0 ; i < SIZE ; ++i )
+        for ( size_t i = 0 ; i < size_ ; ++i )
         {
             chunks_shared_ptr[ i ] = false;
         }
@@ -36,8 +38,8 @@ struct Allocator
 
     // A converting copy constructor:
     template< typename U >
-    Allocator( const Allocator< U , SIZE >& other ) noexcept :
-    size_in_bytes( other.size_in_bytes ) , pool_shared_ptr( other.pool_shared_ptr ) , chunks_shared_ptr( other.chunks_shared_ptr )
+    Allocator( const Allocator< U >& other ) noexcept :
+    size_( other.size_ ) , size_in_bytes( other.size_in_bytes ) , pool_shared_ptr( other.pool_shared_ptr ) , chunks_shared_ptr( other.chunks_shared_ptr )
     {
         return;
     }
@@ -54,29 +56,23 @@ struct Allocator
     }
     
     template< typename U >
-    bool operator==( const Allocator< U , SIZE >& ) const noexcept
+    bool operator==( const Allocator< U >& ) const noexcept
     {
         return true;
     }
 
     template< typename U >
-    bool operator!=( const Allocator< U , SIZE >& ) const noexcept
+    bool operator!=( const Allocator< U >& ) const noexcept
     {
         return false;
     }
-
-    template < typename U >
-    struct rebind
-    {
-        typedef Allocator< U , SIZE > other;
-    };
 
     T* allocate( const size_t n );
     void deallocate( T* const p , size_t ) noexcept;
 };
 
-template < typename T , size_t SIZE >
-T* Allocator< T , SIZE >::allocate( const size_t n )
+template < typename T >
+T* Allocator< T >::allocate( const size_t n )
 {
     if ( n == 0 )
     {
@@ -92,7 +88,7 @@ T* Allocator< T , SIZE >::allocate( const size_t n )
 
     size_t count = 0 , i = 0;
 
-    while ( ( count < n ) && ( i < ( SIZE + 2ull ) ) )
+    while ( ( count < n ) && ( i < size_ ) )
     {
         if ( !chunks_shared_ptr[ i ] )
         {
@@ -123,8 +119,8 @@ T* Allocator< T , SIZE >::allocate( const size_t n )
     return ptr;
 }
 
-template< typename T , size_t SIZE >
-void Allocator< T , SIZE >::deallocate( T * const ptr , size_t n ) noexcept
+template< typename T >
+void Allocator< T >::deallocate( T * const ptr , size_t n ) noexcept
 {
     size_t diff = ptr - static_cast< T* >( *pool_shared_ptr );
 

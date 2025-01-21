@@ -5,10 +5,14 @@
 #include <memory>
 #include <cmath>
 
-template <typename T>
+#include "allocator.h"
+
+template < typename T , class Alloc = std::allocator< T > >
 class SequenceContainer
 {
     const float EXPANSION_COEFFICIENT = 1.5F;
+
+    Alloc allocator_;
     std::shared_ptr< T[] > container;
     size_t capacity_;
     size_t size_;
@@ -71,6 +75,12 @@ class SequenceContainer
         container = std::make_shared< T[] >( capacity_ );
     }
 
+    SequenceContainer( const Alloc& allocator , const size_t capacity ) :
+    allocator_( allocator ) , capacity_( capacity ) , size_( 0ull )
+    {
+        container = std::allocate_shared< T[] >( allocator_ , 0ull );
+    }
+
     /**
      * @brief
      * Конструктор перемещения
@@ -123,7 +133,9 @@ class SequenceContainer
         {
             size_t new_capacity = (size_t)std::round( capacity_ * EXPANSION_COEFFICIENT );
 
-            temp = std::make_shared< T[] >( new_capacity );
+            Alloc new_alloc( new_capacity );
+
+            temp = std::allocate_shared< T[] >( new_alloc , 0ull );
 
             for ( size_t i = 0 ; i < capacity_ ; ++i )
             {
@@ -132,6 +144,7 @@ class SequenceContainer
 
             container = temp;
             capacity_ = new_capacity;
+            allocator_ = new_alloc;
 
             temp[ size_++ ] = element;
         }
@@ -166,13 +179,17 @@ class SequenceContainer
 
         if ( capacity_ >= ( size_ + 1 ) )
         {
-            temp = std::make_shared< T[] >( capacity_ );
+            Alloc temp_alloc( capacity_ );
+
+            temp = std::allocate_shared< T[] >( temp_alloc , 0ull );
         }
         else
         {
             size_t new_capacity = (size_t)std::round( capacity_ * EXPANSION_COEFFICIENT );
 
-            temp = std::make_shared< T[] >( new_capacity );
+            Alloc temp_alloc( new_capacity );
+
+            temp = std::allocate_shared< T[] >( temp_alloc , 0ull );
 
             capacity_ = new_capacity;
         }
@@ -210,7 +227,10 @@ class SequenceContainer
             throw "Out of size";
         }
 
-        std::shared_ptr< T[] > temp = std::make_shared< T[] >( capacity_ );
+        std::shared_ptr< T[] > temp;
+        Alloc temp_alloc( capacity_ );
+
+        temp = std::allocate_shared< T[] >( temp_alloc , capacity_ );
 
         for ( size_t i = 0 ; i < index ; ++i )
         {
