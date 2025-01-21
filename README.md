@@ -5,9 +5,10 @@
 * lab1: ветка lab1
 * lab2: ветка lab2
 * lab3: ветка lab3
+* lab4: ветка lab4
 
 # В процессе
-* lab4: ветка feature
+* lab5: ветка feature
 
 # В планах
 *
