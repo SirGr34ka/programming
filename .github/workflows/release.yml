@@ -3,7 +3,7 @@ name: 'C++ CI'
 on:
   push:
     branches:
-      - lab4
+      - lab5
 
 jobs:
   create_release:
@@ -46,8 +46,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url}}
-          asset_name: allocator-0.0.${{ github.run_number }}-Linux.deb
-          asset_path: build/GCC/allocator-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: physics-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: build/GCC/physics-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
 
   release_assets_win:
@@ -73,6 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_name: allocator-0.0.${{ github.run_number }}-win64.zip
-          asset_path: build/MSVC/allocator-0.0.${{ github.run_number }}-win64.zip
+          asset_name: physics-0.0.${{ github.run_number }}-win64.zip
+          asset_path: build/MSVC/physics-0.0.${{ github.run_number }}-win64.zip
           asset_content_type: application/zip
