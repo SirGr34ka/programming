@@ -11,16 +11,17 @@ void Physics::setWorldBox(const Point& topLeft, const Point& bottomRight) {
     this->bottomRight = bottomRight;
 }
 
-void Physics::update(std::vector<Ball>& balls, const size_t ticks) const {
+void Physics::update( std::vector<Ball>& balls , std::vector< Dust >& dusts , const size_t ticks ) const {
 
     for (size_t i = 0; i < ticks; ++i) {
-        move(balls);
-        collideWithBox(balls);
-        collideBalls(balls);
+        move( balls );
+        move( dusts );
+        collideWithBox( balls );
+        collideBalls( balls , dusts );
     }
 }
 
-void Physics::collideBalls(std::vector<Ball>& balls) const {
+void Physics::collideBalls( std::vector<Ball>& balls , std::vector< Dust >& dusts ) const {
     for (auto a = balls.begin(); a != balls.end(); ++a) {
         if ( a->getIsCollidable() )
         {
@@ -31,7 +32,25 @@ void Physics::collideBalls(std::vector<Ball>& balls) const {
                 const double collisionDistance2 =
                     collisionDistance * collisionDistance;
 
-                if (distanceBetweenCenters2 < collisionDistance2) {
+                if ( ( distanceBetweenCenters2 < collisionDistance2 ) && ( b->getIsCollidable() ) )
+                {
+                    Dust dust1( a->getCenter() , Velocity( -500 , 60 ) );
+                    Dust dust2( b->getCenter() , Velocity( 500 , 60 ) );
+                    Dust dust3( a->getCenter() , Velocity( -500 , 30 ) );
+                    Dust dust4( b->getCenter() , Velocity( 500 , 30 ) );
+                    Dust dust5( a->getCenter() , Velocity( -500 , 45 ) );
+                    Dust dust6( b->getCenter() , Velocity( 500 , 45 ) );
+                    Dust dust7( a->getCenter() , Velocity( -500 , 90 ) );
+                    Dust dust8( b->getCenter() , Velocity( 500 , 90 ) );
+                    dusts.push_back( dust1 );
+                    dusts.push_back( dust2 );
+                    dusts.push_back( dust3 );
+                    dusts.push_back( dust4 );
+                    dusts.push_back( dust5 );
+                    dusts.push_back( dust6 );
+                    dusts.push_back( dust7 );
+                    dusts.push_back( dust8 );
+
                     processCollision(*a, *b, distanceBetweenCenters2);
                 }
             }
@@ -63,11 +82,12 @@ void Physics::collideWithBox(std::vector<Ball>& balls) const {
     }
 }
 
-void Physics::move(std::vector<Ball>& balls) const {
-    for (Ball& ball : balls) {
+template< typename T >
+void Physics::move( std::vector< T >& objects ) const {
+    for ( T& object : objects ) {
         Point newPos =
-            ball.getCenter() + ball.getVelocity().vector() * timePerTick;
-        ball.setCenter(newPos);
+            object.getCenter() + object.getVelocity().vector() * timePerTick;
+        object.setCenter(newPos);
     }
 }
 
